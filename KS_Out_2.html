@@ -1,0 +1,3540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constituency Email Selector</title>
+    <!-- Google Font for better typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        /* Tab Bar styling */
+        .tab-bar {
+            background-color: #9B111E; /* Ferrari dark red */
+            display: flex;
+            justify-content: center;
+            padding: 12px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+        }
+
+        .tab-bar button {
+            background-color: #9B111E;
+            color: white;
+            font-size: 18px;
+            padding: 14px 20px;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            text-transform: uppercase; /* Capitalize the text */
+        }
+
+        .tab-bar button:hover {
+            background-color: #8e0e1c; /* Slightly darker Ferrari red on hover */
+            color: #fff;
+        }
+
+        .tab-bar button.active {
+            background-color: #740d16; /* Active tab color (dark Ferrari red) */
+            color: #fff;
+            border-bottom: 3px solid #fff; /* Underline the active tab */
+        }
+
+        /* Hide all sections by default */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        header {
+            background-color: #9B111E; /* Ferrari dark red */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .form-container {
+            width: 50%;
+            margin: 30px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        select, input[type="text"], textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #9B111E;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #8e0e1c;
+        }
+
+        /* Donation section styles */
+        .donation-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .bitcoin-container {
+            margin-top: 30px;
+        }
+
+        .bitcoin-address {
+            font-family: monospace;
+            font-size: 16px;
+            color: #333;
+            word-wrap: break-word;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+        <button class="tab-btn active" onclick="showTab('home')">Home</button>
+        <button class="tab-btn" onclick="showTab('about')">About</button>
+        <button class="tab-btn" onclick="showTab('donations')">Donations</button>
+    </div>
+
+    <!-- Home Section (Email Generation) -->
+    <div class="tab-content home active">
+        <header>
+            <h1>Keir Starmer - Vote Of No Confidence</h1>
+        </header>
+
+        <!-- Form Container -->
+        <div class="form-container">
+            <form id="emailForm">
+                <label for="constituency">Choose a Constituency:</label>
+                <select id="constituency" onchange="updateFields()">
+                    <option value="">-- Select Constituency --</option>
+                    <option value="Aberafan Maesteg">Aberafan Maesteg</option>
+                    <option value="Aberdeen North">Aberdeen North</option>
+                    <option value="Aberdeen South">Aberdeen South</option>
+                    <option value="Aberdeenshire North and Moray East">Aberdeenshire North and Moray East</option>
+                    <option value="Airdrie and Shotts">Airdrie and Shotts</option>
+                    <option value="Aldershot">Aldershot</option>
+                    <option value="Aldridge-Brownhills">Aldridge-Brownhills</option>
+                    <option value="Alloa and Grangemouth">Alloa and Grangemouth</option>
+                    <option value="Altrincham and Sale West">Altrincham and Sale West</option>
+                    <option value="Alyn and Deeside">Alyn and Deeside</option>
+                    <option value="Amber Valley">Amber Valley</option>
+                    <option value="Angus and Perthshire Glens">Angus and Perthshire Glens</option>
+                    <option value="Arbroath and Broughty Ferry">Arbroath and Broughty Ferry</option>
+                    <option value="Argyll, Bute and South Lochaber">Argyll, Bute and South Lochaber</option>
+                    <option value="Arundel and South Downs">Arundel and South Downs</option>
+                    <option value="Ashfield">Ashfield</option>
+                    <option value="Ashford">Ashford</option>
+                    <option value="Ashton-under-Lyne">Ashton-under-Lyne</option>
+                    <option value="Aylesbury">Aylesbury</option>
+                    <option value="Ayr, Carrick and Cumnock">Ayr, Carrick and Cumnock</option>
+                    <option value="Banbury">Banbury</option>
+                    <option value="Bangor Aberconwy">Bangor Aberconwy</option>
+                    <option value="Barking">Barking</option>
+                    <option value="Barnsley North">Barnsley North</option>
+                    <option value="Barnsley South">Barnsley South</option>
+                    <option value="Barrow and Furness">Barrow and Furness</option>
+                    <option value="Basildon and Billericay">Basildon and Billericay</option>
+                    <option value="Basingstoke">Basingstoke</option>
+                    <option value="Bassetlaw">Bassetlaw</option>
+                    <option value="Bath">Bath</option>
+                    <option value="Bathgate and Linlithgow">Bathgate and Linlithgow</option>
+                    <option value="Battersea">Battersea</option>
+                    <option value="Beaconsfield">Beaconsfield</option>
+                    <option value="Beckenham and Penge">Beckenham and Penge</option>
+                    <option value="Bedford">Bedford</option>
+                    <option value="Belfast East">Belfast East</option>
+                    <option value="Belfast North">Belfast North</option>
+                    <option value="Belfast South and Mid Down">Belfast South and Mid Down</option>
+                    <option value="Belfast West">Belfast West</option>
+                    <option value="Bermondsey and Old Southwark">Bermondsey and Old Southwark</option>
+                    <option value="Berwickshire, Roxburgh and Selkirk">Berwickshire, Roxburgh and Selkirk</option>
+                    <option value="Bethnal Green and Stepney">Bethnal Green and Stepney</option>
+                    <option value="Beverley and Holderness">Beverley and Holderness</option>
+                    <option value="Bexhill and Battle">Bexhill and Battle</option>
+                    <option value="Bexleyheath and Crayford">Bexleyheath and Crayford</option>
+                    <option value="Bicester and Woodstock">Bicester and Woodstock</option>
+                    <option value="Birkenhead">Birkenhead</option>
+                    <option value="Birmingham Edgbaston">Birmingham Edgbaston</option>
+                    <option value="Birmingham Erdington">Birmingham Erdington</option>
+                    <option value="Birmingham Hall Green and Moseley">Birmingham Hall Green and Moseley</option>
+                    <option value="Birmingham Hodge Hill and Solihull North">Birmingham Hodge Hill and Solihull North</option>
+                    <option value="Birmingham Ladywood">Birmingham Ladywood</option>
+                    <option value="Birmingham Northfield">Birmingham Northfield</option>
+                    <option value="Birmingham Perry Barr">Birmingham Perry Barr</option>
+                    <option value="Birmingham Selly Oak">Birmingham Selly Oak</option>
+                    <option value="Birmingham Yardley">Birmingham Yardley</option>
+                    <option value="Bishop Auckland">Bishop Auckland</option>
+                    <option value="Blackburn">Blackburn</option>
+                    <option value="Blackley and Middleton South">Blackley and Middleton South</option>
+                    <option value="Blackpool North and Fleetwood">Blackpool North and Fleetwood</option>
+                    <option value="Blackpool South">Blackpool South</option>
+                    <option value="Blaenau Gwent and Rhymney">Blaenau Gwent and Rhymney</option>
+                    <option value="Blaydon and Consett">Blaydon and Consett</option>
+                    <option value="Blyth and Ashington">Blyth and Ashington</option>
+                    <option value="Bognor Regis and Littlehampton">Bognor Regis and Littlehampton</option>
+                    <option value="Bolsover">Bolsover</option>
+                    <option value="Bolton North East">Bolton North East</option>
+                    <option value="Bolton South and Walkden">Bolton South and Walkden</option>
+                    <option value="Bolton West">Bolton West</option>
+                    <option value="Bootle">Bootle</option>
+                    <option value="Boston and Skegness">Boston and Skegness</option>
+                    <option value="Bournemouth East">Bournemouth East</option>
+                    <option value="Bournemouth West">Bournemouth West</option>
+                    <option value="Bracknell">Bracknell</option>
+                    <option value="Bradford East">Bradford East</option>
+                    <option value="Bradford South">Bradford South</option>
+                    <option value="Bradford West">Bradford West</option>
+                    <option value="Braintree">Braintree</option>
+                    <option value="Brecon, Radnor and Cwm Tawe">Brecon, Radnor and Cwm Tawe</option>
+                    <option value="Brent East">Brent East</option>
+                    <option value="Brent West">Brent West</option>
+                    <option value="Brentford and Isleworth">Brentford and Isleworth</option>
+                    <option value="Brentwood and Ongar">Brentwood and Ongar</option>
+                    <option value="Bridgend">Bridgend</option>
+                    <option value="Bridgwater">Bridgwater</option>
+                    <option value="Bridlington and The Wolds">Bridlington and The Wolds</option>
+                    <option value="Brigg and Immingham">Brigg and Immingham</option>
+                    <option value="Brighton Kemptown and Peacehaven">Brighton Kemptown and Peacehaven</option>
+                    <option value="Brighton Pavilion">Brighton Pavilion</option>
+                    <option value="Bristol Central">Bristol Central</option>
+                    <option value="Bristol East">Bristol East</option>
+                    <option value="Bristol North East">Bristol North East</option>
+                    <option value="Bristol North West">Bristol North West</option>
+                    <option value="Bristol South">Bristol South</option>
+                    <option value="Broadland and Fakenham">Broadland and Fakenham</option>
+                    <option value="Bromley and Biggin Hill">Bromley and Biggin Hill</option>
+                    <option value="Bromsgrove">Bromsgrove</option>
+                    <option value="Broxbourne">Broxbourne</option>
+                    <option value="Broxtowe">Broxtowe</option>
+                    <option value="Buckingham and Bletchley">Buckingham and Bletchley</option>
+                    <option value="Burnley">Burnley</option>
+                    <option value="Burton and Uttoxeter">Burton and Uttoxeter</option>
+                    <option value="Bury North">Bury North</option>
+                    <option value="Bury South">Bury South</option>
+                    <option value="Bury St Edmunds and Stowmarket">Bury St Edmunds and Stowmarket</option>
+                    <option value="Caerfyrddin">Caerfyrddin</option>
+                    <option value="Caerphilly">Caerphilly</option>
+                    <option value="Caithness, Sutherland and Easter Ross">Caithness, Sutherland and Easter Ross</option>
+                    <option value="Calder Valley">Calder Valley</option>
+                    <option value="Camborne and Redruth">Camborne and Redruth</option>
+                    <option value="Cambridge">Cambridge</option>
+                    <option value="Cannock Chase">Cannock Chase</option>
+                    <option value="Canterbury">Canterbury</option>
+                    <option value="Cardiff East">Cardiff East</option>
+                    <option value="Cardiff North">Cardiff North</option>
+                    <option value="Cardiff South and Penarth">Cardiff South and Penarth</option>
+                    <option value="Cardiff West">Cardiff West</option>
+                    <option value="Carlisle">Carlisle</option>
+                    <option value="Carshalton and Wallington">Carshalton and Wallington</option>
+                    <option value="Castle Point">Castle Point</option>
+                    <option value="Central Ayrshire">Central Ayrshire</option>
+                    <option value="Central Devon">Central Devon</option>
+                    <option value="Central Suffolk and North Ipswich">Central Suffolk and North Ipswich</option>
+                    <option value="Ceredigion Preseli">Ceredigion Preseli</option>
+                    <option value="Chatham and Aylesford">Chatham and Aylesford</option>
+                    <option value="Cheadle">Cheadle</option>
+                    <option value="Chelmsford">Chelmsford</option>
+                    <option value="Chelsea and Fulham">Chelsea and Fulham</option>
+                    <option value="Cheltenham">Cheltenham</option>
+                    <option value="Chesham and Amersham">Chesham and Amersham</option>
+                    <option value="Chester North and Neston">Chester North and Neston</option>
+                    <option value="Chester South and Eddisbury">Chester South and Eddisbury</option>
+                    <option value="Chesterfield">Chesterfield</option>
+                    <option value="Chichester">Chichester</option>
+                    <option value="Chingford and Woodford Green">Chingford and Woodford Green</option>
+                    <option value="Chippenham">Chippenham</option>
+                    <option value="Chipping Barnet">Chipping Barnet</option>
+                    <option value="Chorley">Chorley</option>
+                    <option value="Christchurch">Christchurch</option>
+                    <option value="Cities of London and Westminster">Cities of London and Westminster</option>
+                    <option value="City of Durham">City of Durham</option>
+                    <option value="Clacton">Clacton</option>
+                    <option value="Clapham and Brixton Hill">Clapham and Brixton Hill</option>
+                    <option value="Clwyd East">Clwyd East</option>
+                    <option value="Clwyd North">Clwyd North</option>
+                    <option value="Coatbridge and Bellshill">Coatbridge and Bellshill</option>
+                    <option value="Colchester">Colchester</option>
+                    <option value="Colne Valley">Colne Valley</option>
+                    <option value="Congleton">Congleton</option>
+                    <option value="Corby and East Northamptonshire">Corby and East Northamptonshire</option>
+                    <option value="Coventry East">Coventry East</option>
+                    <option value="Coventry North West">Coventry North West</option>
+                    <option value="Coventry South">Coventry South</option>
+                    <option value="Cowdenbeath and Kirkcaldy">Cowdenbeath and Kirkcaldy</option>
+                    <option value="Cramlington and Killingworth">Cramlington and Killingworth</option>
+                    <option value="Crawley">Crawley</option>
+                    <option value="Crewe and Nantwich">Crewe and Nantwich</option>
+                    <option value="Croydon East">Croydon East</option>
+                    <option value="Croydon South">Croydon South</option>
+                    <option value="Croydon West">Croydon West</option>
+                    <option value="Cumbernauld and Kirkintilloch">Cumbernauld and Kirkintilloch</option>
+                    <option value="Dagenham and Rainham">Dagenham and Rainham</option>
+                    <option value="Darlington">Darlington</option>
+                    <option value="Dartford">Dartford</option>
+                    <option value="Daventry">Daventry</option>
+                    <option value="Derby North">Derby North</option>
+                    <option value="Derby South">Derby South</option>
+                    <option value="Derbyshire Dales">Derbyshire Dales</option>
+                    <option value="Dewsbury and Batley">Dewsbury and Batley</option>
+                    <option value="Didcot and Wantage">Didcot and Wantage</option>
+                    <option value="Doncaster Central">Doncaster Central</option>
+                    <option value="Doncaster East and the Isle of Axholme">Doncaster East and the Isle of Axholme</option>
+                    <option value="Doncaster North">Doncaster North</option>
+                    <option value="Dorking and Horley">Dorking and Horley</option>
+                    <option value="Dover and Deal">Dover and Deal</option>
+                    <option value="Droitwich and Evesham">Droitwich and Evesham</option>
+                    <option value="Dudley">Dudley</option>
+                    <option value="Dulwich and West Norwood">Dulwich and West Norwood</option>
+                    <option value="Dumfries and Galloway">Dumfries and Galloway</option>
+                    <option value="Dumfriesshire, Clydesdale and Tweeddale">Dumfriesshire, Clydesdale and Tweeddale</option>
+                    <option value="Dundee Central">Dundee Central</option>
+                    <option value="Dunfermline and Dollar">Dunfermline and Dollar</option>
+                    <option value="Dunstable and Leighton Buzzard">Dunstable and Leighton Buzzard</option>
+                    <option value="Dwyfor Meirionnydd">Dwyfor Meirionnydd</option>
+                    <option value="Ealing Central and Acton">Ealing Central and Acton</option>
+                    <option value="Ealing North">Ealing North</option>
+                    <option value="Ealing Southall">Ealing Southall</option>
+                    <option value="Earley and Woodley">Earley and Woodley</option>
+                    <option value="Easington">Easington</option>
+                    <option value="East Antrim">East Antrim</option>
+                    <option value="East Grinstead and Uckfield">East Grinstead and Uckfield</option>
+                    <option value="East Ham">East Ham</option>
+                    <option value="East Hampshire">East Hampshire</option>
+                    <option value="East Kilbride and Strathaven">East Kilbride and Strathaven</option>
+                    <option value="East Londonderry">East Londonderry</option>
+                    <option value="East Renfrewshire">East Renfrewshire</option>
+                    <option value="East Surrey">East Surrey</option>
+                    <option value="East Thanet">East Thanet</option>
+                    <option value="East Wiltshire">East Wiltshire</option>
+                    <option value="East Worthing and Shoreham">East Worthing and Shoreham</option>
+                    <option value="Eastbourne">Eastbourne</option>
+                    <option value="Eastleigh">Eastleigh</option>
+                    <option value="Edinburgh East and Musselburgh">Edinburgh East and Musselburgh</option>
+                    <option value="Edinburgh North and Leith">Edinburgh North and Leith</option>
+                    <option value="Edinburgh South">Edinburgh South</option>
+                    <option value="Edinburgh South West">Edinburgh South West</option>
+                    <option value="Edinburgh West">Edinburgh West</option>
+                    <option value="Edmonton and Winchmore Hill">Edmonton and Winchmore Hill</option>
+                    <option value="Ellesmere Port and Bromborough">Ellesmere Port and Bromborough</option>
+                    <option value="Eltham and Chislehurst">Eltham and Chislehurst</option>
+                    <option value="Ely and East Cambridgeshire">Ely and East Cambridgeshire</option>
+                    <option value="Enfield North">Enfield North</option>
+                    <option value="Epping Forest">Epping Forest</option>
+                    <option value="Epsom and Ewell">Epsom and Ewell</option>
+                    <option value="Erewash">Erewash</option>
+                    <option value="Erith and Thamesmead">Erith and Thamesmead</option>
+                    <option value="Esher and Walton">Esher and Walton</option>
+                    <option value="Exeter">Exeter</option>
+                    <option value="Exmouth and Exeter East">Exmouth and Exeter East</option>
+                    <option value="Falkirk">Falkirk</option>
+                    <option value="Fareham and Waterlooville">Fareham and Waterlooville</option>
+                    <option value="Farnham and Bordon">Farnham and Bordon</option>
+                    <option value="Faversham and Mid Kent">Faversham and Mid Kent</option>
+                    <option value="Feltham and Heston">Feltham and Heston</option>
+                    <option value="Fermanagh and South Tyrone">Fermanagh and South Tyrone</option>
+                    <option value="Filton and Bradley Stoke">Filton and Bradley Stoke</option>
+                    <option value="Finchley and Golders Green">Finchley and Golders Green</option>
+                    <option value="Folkestone and Hythe">Folkestone and Hythe</option>
+                    <option value="Forest of Dean">Forest of Dean</option>
+                    <option value="Foyle">Foyle</option>
+                    <option value="Frome and East Somerset">Frome and East Somerset</option>
+                    <option value="Fylde">Fylde</option>
+                    <option value="Gainsborough">Gainsborough</option>
+                    <option value="Gateshead Central and Whickham">Gateshead Central and Whickham</option>
+                    <option value="Gedling">Gedling</option>
+                    <option value="Gillingham and Rainham">Gillingham and Rainham</option>
+                    <option value="Glasgow East">Glasgow East</option>
+                    <option value="Glasgow North">Glasgow North</option>
+                    <option value="Glasgow North East">Glasgow North East</option>
+                    <option value="Glasgow South">Glasgow South</option>
+                    <option value="Glasgow South West">Glasgow South West</option>
+                    <option value="Glasgow West">Glasgow West</option>
+                    <option value="Glastonbury and Somerton">Glastonbury and Somerton</option>
+                    <option value="Glenrothes and Mid Fife">Glenrothes and Mid Fife</option>
+                    <option value="Gloucester">Gloucester</option>
+                    <option value="Godalming and Ash">Godalming and Ash</option>
+                    <option value="Goole and Pocklington">Goole and Pocklington</option>
+                    <option value="Gordon and Buchan">Gordon and Buchan</option>
+                    <option value="Gorton and Denton">Gorton and Denton</option>
+                    <option value="Gosport">Gosport</option>
+                    <option value="Gower">Gower</option>
+                    <option value="Grantham and Bourne">Grantham and Bourne</option>
+                    <option value="Gravesham">Gravesham</option>
+                    <option value="Great Grimsby and Cleethorpes">Great Grimsby and Cleethorpes</option>
+                    <option value="Great Yarmouth">Great Yarmouth</option>
+                    <option value="Greenwich and Woolwich">Greenwich and Woolwich</option>
+                    <option value="Guildford">Guildford</option>
+                    <option value="Hackney North and Stoke Newington">Hackney North and Stoke Newington</option>
+                    <option value="Hackney South and Shoreditch">Hackney South and Shoreditch</option>
+                    <option value="Halesowen">Halesowen</option>
+                    <option value="Halifax">Halifax</option>
+                    <option value="Hamble Valley">Hamble Valley</option>
+                    <option value="Hamilton and Clyde Valley">Hamilton and Clyde Valley</option>
+                    <option value="Hammersmith and Chiswick">Hammersmith and Chiswick</option>
+                    <option value="Hampstead and Highgate">Hampstead and Highgate</option>
+                    <option value="Harborough, Oadby and Wigston">Harborough, Oadby and Wigston</option>
+                    <option value="Harlow">Harlow</option>
+                    <option value="Harpenden and Berkhamsted">Harpenden and Berkhamsted</option>
+                    <option value="Harrogate and Knaresborough">Harrogate and Knaresborough</option>
+                    <option value="Harrow East">Harrow East</option>
+                    <option value="Harrow West">Harrow West</option>
+                    <option value="Hartlepool">Hartlepool</option>
+                    <option value="Harwich and North Essex">Harwich and North Essex</option>
+                    <option value="Hastings and Rye">Hastings and Rye</option>
+                    <option value="Havant">Havant</option>
+                    <option value="Hayes and Harlington">Hayes and Harlington</option>
+                    <option value="Hazel Grove">Hazel Grove</option>
+                    <option value="Hemel Hempstead">Hemel Hempstead</option>
+                    <option value="Hendon">Hendon</option>
+                    <option value="Henley and Thame">Henley and Thame</option>
+                    <option value="Hereford and South Herefordshire">Hereford and South Herefordshire</option>
+                    <option value="Herne Bay and Sandwich">Herne Bay and Sandwich</option>
+                    <option value="Hertford and Stortford">Hertford and Stortford</option>
+                    <option value="Hertsmere">Hertsmere</option>
+                    <option value="Hexham">Hexham</option>
+                    <option value="Heywood and Middleton North">Heywood and Middleton North</option>
+                    <option value="High Peak">High Peak</option>
+                    <option value="Hinckley and Bosworth">Hinckley and Bosworth</option>
+                    <option value="Hitchin">Hitchin</option>
+                    <option value="Holborn and St Pancras">Holborn and St Pancras</option>
+                    <option value="Honiton and Sidmouth">Honiton and Sidmouth</option>
+                    <option value="Hornchurch and Upminster">Hornchurch and Upminster</option>
+                    <option value="Hornsey and Friern Barnet">Hornsey and Friern Barnet</option>
+                    <option value="Horsham">Horsham</option>
+                    <option value="Houghton and Sunderland South">Houghton and Sunderland South</option>
+                    <option value="Hove and Portslade">Hove and Portslade</option>
+                    <option value="Huddersfield">Huddersfield</option>
+                    <option value="Huntingdon">Huntingdon</option>
+                    <option value="Hyndburn">Hyndburn</option>
+                    <option value="Ilford North">Ilford North</option>
+                    <option value="Ilford South">Ilford South</option>
+                    <option value="Inverclyde and Renfrewshire West">Inverclyde and Renfrewshire West</option>
+                    <option value="Inverness, Skye and West Ross-shire">Inverness, Skye and West Ross-shire</option>
+                    <option value="Ipswich">Ipswich</option>
+                    <option value="Isle of Wight East">Isle of Wight East</option>
+                    <option value="Isle of Wight West">Isle of Wight West</option>
+                    <option value="Islington North">Islington North</option>
+                    <option value="Islington South and Finsbury">Islington South and Finsbury</option>
+                    <option value="Jarrow and Gateshead East">Jarrow and Gateshead East</option>
+                    <option value="Keighley and Ilkley">Keighley and Ilkley</option>
+                    <option value="Kenilworth and Southam">Kenilworth and Southam</option>
+                    <option value="Kensington and Bayswater">Kensington and Bayswater</option>
+                    <option value="Kettering">Kettering</option>
+                    <option value="Kilmarnock and Loudoun">Kilmarnock and Loudoun</option>
+                    <option value="Kingston and Surbiton">Kingston and Surbiton</option>
+                    <option value="Kingston upon Hull East">Kingston upon Hull East</option>
+                    <option value="Kingston upon Hull North and Cottingham">Kingston upon Hull North and Cottingham</option>
+                    <option value="Kingston upon Hull West and Haltemprice">Kingston upon Hull West and Haltemprice</option>
+                    <option value="Kingswinford and South Staffordshire">Kingswinford and South Staffordshire</option>
+                    <option value="Knowsley">Knowsley</option>
+                    <option value="Lagan Valley">Lagan Valley</option>
+                    <option value="Lancaster and Wyre">Lancaster and Wyre</option>
+                    <option value="Leeds Central and Headingley">Leeds Central and Headingley</option>
+                    <option value="Leeds East">Leeds East</option>
+                    <option value="Leeds North East">Leeds North East</option>
+                    <option value="Leeds North West">Leeds North West</option>
+                    <option value="Leeds South">Leeds South</option>
+                    <option value="Leeds South West and Morley">Leeds South West and Morley</option>
+                    <option value="Leeds West and Pudsey">Leeds West and Pudsey</option>
+                    <option value="Leicester East">Leicester East</option>
+                    <option value="Leicester South">Leicester South</option>
+                    <option value="Leicester West">Leicester West</option>
+                    <option value="Leigh and Atherton">Leigh and Atherton</option>
+                    <option value="Lewes">Lewes</option>
+                    <option value="Lewisham East">Lewisham East</option>
+                    <option value="Lewisham North">Lewisham North</option>
+                    <option value="Lewisham West and East Dulwich">Lewisham West and East Dulwich</option>
+                    <option value="Leyton and Wanstead">Leyton and Wanstead</option>
+                    <option value="Lichfield">Lichfield</option>
+                    <option value="Lincoln">Lincoln</option>
+                    <option value="Liverpool Garston">Liverpool Garston</option>
+                    <option value="Liverpool Riverside">Liverpool Riverside</option>
+                    <option value="Liverpool Walton">Liverpool Walton</option>
+                    <option value="Liverpool Wavertree">Liverpool Wavertree</option>
+                    <option value="Liverpool West Derby">Liverpool West Derby</option>
+                    <option value="Livingston">Livingston</option>
+                    <option value="Llanelli">Llanelli</option>
+                    <option value="Lothian East">Lothian East</option>
+                    <option value="Loughborough">Loughborough</option>
+                    <option value="Louth and Horncastle">Louth and Horncastle</option>
+                    <option value="Lowestoft">Lowestoft</option>
+                    <option value="Luton North">Luton North</option>
+                    <option value="Luton South and South Bedfordshire">Luton South and South Bedfordshire</option>
+                    <option value="Macclesfield">Macclesfield</option>
+                    <option value="Maidenhead">Maidenhead</option>
+                    <option value="Maidstone and Malling">Maidstone and Malling</option>
+                    <option value="Makerfield">Makerfield</option>
+                    <option value="Maldon">Maldon</option>
+                    <option value="Manchester Central">Manchester Central</option>
+                    <option value="Manchester Rusholme">Manchester Rusholme</option>
+                    <option value="Manchester Withington">Manchester Withington</option>
+                    <option value="Mansfield">Mansfield</option>
+                    <option value="Melksham and Devizes">Melksham and Devizes</option>
+                    <option value="Melton and Syston">Melton and Syston</option>
+                    <option value="Meriden and Solihull East">Meriden and Solihull East</option>
+                    <option value="Merthyr Tydfil and Aberdare">Merthyr Tydfil and Aberdare</option>
+                    <option value="Mid and South Pembrokeshire">Mid and South Pembrokeshire</option>
+                    <option value="Mid Bedfordshire">Mid Bedfordshire</option>
+                    <option value="Mid Buckinghamshire">Mid Buckinghamshire</option>
+                    <option value="Mid Cheshire">Mid Cheshire</option>
+                    <option value="Mid Derbyshire">Mid Derbyshire</option>
+                    <option value="Mid Dorset and North Poole">Mid Dorset and North Poole</option>
+                    <option value="Mid Dunbartonshire">Mid Dunbartonshire</option>
+                    <option value="Mid Leicestershire">Mid Leicestershire</option>
+                    <option value="Mid Norfolk">Mid Norfolk</option>
+                    <option value="Mid Sussex">Mid Sussex</option>
+                    <option value="Mid Ulster">Mid Ulster</option>
+                    <option value="Middlesbrough and Thornaby East">Middlesbrough and Thornaby East</option>
+                    <option value="Middlesbrough South and East Cleveland">Middlesbrough South and East Cleveland</option>
+                    <option value="Midlothian">Midlothian</option>
+                    <option value="Milton Keynes Central">Milton Keynes Central</option>
+                    <option value="Milton Keynes North">Milton Keynes North</option>
+                    <option value="Mitcham and Morden">Mitcham and Morden</option>
+                    <option value="Monmouthshire">Monmouthshire</option>
+                    <option value="Montgomeryshire and Glyndŵr">Montgomeryshire and Glyndŵr</option>
+                    <option value="Moray West, Nairn and Strathspey">Moray West, Nairn and Strathspey</option>
+                    <option value="Morecambe and Lunesdale">Morecambe and Lunesdale</option>
+                    <option value="Motherwell, Wishaw and Carluke">Motherwell, Wishaw and Carluke</option>
+                    <option value="Na h-Eileanan an Iar">Na h-Eileanan an Iar</option>
+                    <option value="Neath and Swansea East">Neath and Swansea East</option>
+                    <option value="New Forest East">New Forest East</option>
+                    <option value="New Forest West">New Forest West</option>
+                    <option value="Newark">Newark</option>
+                    <option value="Newbury">Newbury</option>
+                    <option value="Newcastle upon Tyne Central and West">Newcastle upon Tyne Central and West</option>
+                    <option value="Newcastle upon Tyne East and Wallsend">Newcastle upon Tyne East and Wallsend</option>
+                    <option value="Newcastle upon Tyne North">Newcastle upon Tyne North</option>
+                    <option value="Newcastle-under-Lyme">Newcastle-under-Lyme</option>
+                    <option value="Newport East">Newport East</option>
+                    <option value="Newport West and Islwyn">Newport West and Islwyn</option>
+                    <option value="Newry and Armagh">Newry and Armagh</option>
+                    <option value="Newton Abbot">Newton Abbot</option>
+                    <option value="Newton Aycliffe and Spennymoor">Newton Aycliffe and Spennymoor</option>
+                    <option value="Normanton and Hemsworth">Normanton and Hemsworth</option>
+                    <option value="North Antrim">North Antrim</option>
+                    <option value="North Ayrshire and Arran">North Ayrshire and Arran</option>
+                    <option value="North Bedfordshire">North Bedfordshire</option>
+                    <option value="North Cornwall">North Cornwall</option>
+                    <option value="North Cotswolds">North Cotswolds</option>
+                    <option value="North Devon">North Devon</option>
+                    <option value="North Dorset">North Dorset</option>
+                    <option value="North Down">North Down</option>
+                    <option value="North Durham">North Durham</option>
+                    <option value="North East Cambridgeshire">North East Cambridgeshire</option>
+                    <option value="North East Derbyshire">North East Derbyshire</option>
+                    <option value="North East Fife">North East Fife</option>
+                    <option value="North East Hampshire">North East Hampshire</option>
+                    <option value="North East Hertfordshire">North East Hertfordshire</option>
+                    <option value="North East Somerset and Hanham">North East Somerset and Hanham</option>
+                    <option value="North Herefordshire">North Herefordshire</option>
+                    <option value="North Norfolk">North Norfolk</option>
+                    <option value="North Northumberland">North Northumberland</option>
+                    <option value="North Shropshire">North Shropshire</option>
+                    <option value="North Somerset">North Somerset</option>
+                    <option value="North Warwickshire and Bedworth">North Warwickshire and Bedworth</option>
+                    <option value="North West Cambridgeshire">North West Cambridgeshire</option>
+                    <option value="North West Essex">North West Essex</option>
+                    <option value="North West Hampshire">North West Hampshire</option>
+                    <option value="North West Leicestershire">North West Leicestershire</option>
+                    <option value="North West Norfolk">North West Norfolk</option>
+                    <option value="Northampton North">Northampton North</option>
+                    <option value="Northampton South">Northampton South</option>
+                    <option value="Norwich North">Norwich North</option>
+                    <option value="Norwich South">Norwich South</option>
+                    <option value="Nottingham East">Nottingham East</option>
+                    <option value="Nottingham North and Kimberley">Nottingham North and Kimberley</option>
+                    <option value="Nottingham South">Nottingham South</option>
+                    <option value="Nuneaton">Nuneaton</option>
+                    <option value="Old Bexley and Sidcup">Old Bexley and Sidcup</option>
+                    <option value="Oldham East and Saddleworth">Oldham East and Saddleworth</option>
+                    <option value="Oldham West, Chadderton and Royton">Oldham West, Chadderton and Royton</option>
+                    <option value="Orkney and Shetland">Orkney and Shetland</option>
+                    <option value="Orpington">Orpington</option>
+                    <option value="Ossett and Denby Dale">Ossett and Denby Dale</option>
+                    <option value="Oxford East">Oxford East</option>
+                    <option value="Oxford West and Abingdon">Oxford West and Abingdon</option>
+                    <option value="Paisley and Renfrewshire North">Paisley and Renfrewshire North</option>
+                    <option value="Paisley and Renfrewshire South">Paisley and Renfrewshire South</option>
+                    <option value="Peckham">Peckham</option>
+                    <option value="Pendle and Clitheroe">Pendle and Clitheroe</option>
+                    <option value="Penistone and Stocksbridge">Penistone and Stocksbridge</option>
+                    <option value="Penrith and Solway">Penrith and Solway</option>
+                    <option value="Perth and Kinross-shire">Perth and Kinross-shire</option>
+                    <option value="Peterborough">Peterborough</option>
+                    <option value="Plymouth Moor View">Plymouth Moor View</option>
+                    <option value="Plymouth Sutton and Devonport">Plymouth Sutton and Devonport</option>
+                    <option value="Pontefract, Castleford and Knottingley">Pontefract, Castleford and Knottingley</option>
+                    <option value="Pontypridd">Pontypridd</option>
+                    <option value="Poole">Poole</option>
+                    <option value="Poplar and Limehouse">Poplar and Limehouse</option>
+                    <option value="Portsmouth North">Portsmouth North</option>
+                    <option value="Portsmouth South">Portsmouth South</option>
+                    <option value="Preston">Preston</option>
+                    <option value="Putney">Putney</option>
+                    <option value="Queen's Park and Maida Vale">Queen's Park and Maida Vale</option>
+                    <option value="Rawmarsh and Conisbrough">Rawmarsh and Conisbrough</option>
+                    <option value="Rayleigh and Wickford">Rayleigh and Wickford</option>
+                    <option value="Reading Central">Reading Central</option>
+                    <option value="Reading West and Mid Berkshire">Reading West and Mid Berkshire</option>
+                    <option value="Redcar">Redcar</option>
+                    <option value="Redditch">Redditch</option>
+                    <option value="Reigate">Reigate</option>
+                    <option value="Rhondda and Ogmore">Rhondda and Ogmore</option>
+                    <option value="Ribble Valley">Ribble Valley</option>
+                    <option value="Richmond and Northallerton">Richmond and Northallerton</option>
+                    <option value="Richmond Park">Richmond Park</option>
+                    <option value="Rochdale">Rochdale</option>
+                    <option value="Rochester and Strood">Rochester and Strood</option>
+                    <option value="Romford">Romford</option>
+                    <option value="Romsey and Southampton North">Romsey and Southampton North</option>
+                    <option value="Rossendale and Darwen">Rossendale and Darwen</option>
+                    <option value="Rother Valley">Rother Valley</option>
+                    <option value="Rotherham">Rotherham</option>
+                    <option value="Rugby">Rugby</option>
+                    <option value="Ruislip, Northwood and Pinner">Ruislip, Northwood and Pinner</option>
+                    <option value="Runcorn and Helsby">Runcorn and Helsby</option>
+                    <option value="Runnymede and Weybridge">Runnymede and Weybridge</option>
+                    <option value="Rushcliffe">Rushcliffe</option>
+                    <option value="Rutherglen">Rutherglen</option>
+                    <option value="Rutland and Stamford">Rutland and Stamford</option>
+                    <option value="Salford">Salford</option>
+                    <option value="Salisbury">Salisbury</option>
+                    <option value="Scarborough and Whitby">Scarborough and Whitby</option>
+                    <option value="Scunthorpe">Scunthorpe</option>
+                    <option value="Sefton Central">Sefton Central</option>
+                    <option value="Selby">Selby</option>
+                    <option value="Sevenoaks">Sevenoaks</option>
+                    <option value="Sheffield Brightside and Hillsborough">Sheffield Brightside and Hillsborough</option>
+                    <option value="Sheffield Central">Sheffield Central</option>
+                    <option value="Sheffield Hallam">Sheffield Hallam</option>
+                    <option value="Sheffield Heeley">Sheffield Heeley</option>
+                    <option value="Sheffield South East">Sheffield South East</option>
+                    <option value="Sherwood Forest">Sherwood Forest</option>
+                    <option value="Shipley">Shipley</option>
+                    <option value="Shrewsbury">Shrewsbury</option>
+                    <option value="Sittingbourne and Sheppey">Sittingbourne and Sheppey</option>
+                    <option value="Skipton and Ripon">Skipton and Ripon</option>
+                    <option value="Sleaford and North Hykeham">Sleaford and North Hykeham</option>
+                    <option value="Slough">Slough</option>
+                    <option value="Smethwick">Smethwick</option>
+                    <option value="Solihull West and Shirley">Solihull West and Shirley</option>
+                    <option value="South Antrim">South Antrim</option>
+                    <option value="South Basildon and East Thurrock">South Basildon and East Thurrock</option>
+                    <option value="South Cambridgeshire">South Cambridgeshire</option>
+                    <option value="South Cotswolds">South Cotswolds</option>
+                    <option value="South Derbyshire">South Derbyshire</option>
+                    <option value="South Devon">South Devon</option>
+                    <option value="South Dorset">South Dorset</option>
+                    <option value="South Down">South Down</option>
+                    <option value="South East Cornwall">South East Cornwall</option>
+                    <option value="South Holland and The Deepings">South Holland and The Deepings</option>
+                    <option value="South Leicestershire">South Leicestershire</option>
+                    <option value="South Norfolk">South Norfolk</option>
+                    <option value="South Northamptonshire">South Northamptonshire</option>
+                    <option value="South Ribble">South Ribble</option>
+                    <option value="South Shields">South Shields</option>
+                    <option value="South Shropshire">South Shropshire</option>
+                    <option value="South Suffolk">South Suffolk</option>
+                    <option value="South West Devon">South West Devon</option>
+                    <option value="South West Hertfordshire">South West Hertfordshire</option>
+                    <option value="South West Norfolk">South West Norfolk</option>
+                    <option value="South West Wiltshire">South West Wiltshire</option>
+                    <option value="Southampton Itchen">Southampton Itchen</option>
+                    <option value="Southampton Test">Southampton Test</option>
+                    <option value="Southend East and Rochford">Southend East and Rochford</option>
+                    <option value="Southend West and Leigh">Southend West and Leigh</option>
+                    <option value="Southgate and Wood Green">Southgate and Wood Green</option>
+                    <option value="Southport">Southport</option>
+                    <option value="Spelthorne">Spelthorne</option>
+                    <option value="Spen Valley">Spen Valley</option>
+                    <option value="St Albans">St Albans</option>
+                    <option value="St Austell and Newquay">St Austell and Newquay</option>
+                    <option value="St Helens North">St Helens North</option>
+                    <option value="St Helens South and Whiston">St Helens South and Whiston</option>
+                    <option value="St Ives">St Ives</option>
+                    <option value="St Neots and Mid Cambridgeshire">St Neots and Mid Cambridgeshire</option>
+                    <option value="Stafford">Stafford</option>
+                    <option value="Staffordshire Moorlands">Staffordshire Moorlands</option>
+                    <option value="Stalybridge and Hyde">Stalybridge and Hyde</option>
+                    <option value="Stevenage">Stevenage</option>
+                    <option value="Stirling and Strathallan">Stirling and Strathallan</option>
+                    <option value="Stockport">Stockport</option>
+                    <option value="Stockton North">Stockton North</option>
+                    <option value="Stockton West">Stockton West</option>
+                    <option value="Stoke-on-Trent Central">Stoke-on-Trent Central</option>
+                    <option value="Stoke-on-Trent North">Stoke-on-Trent North</option>
+                    <option value="Stoke-on-Trent South">Stoke-on-Trent South</option>
+                    <option value="Stone, Great Wyrley and Penkridge">Stone, Great Wyrley and Penkridge</option>
+                    <option value="Stourbridge">Stourbridge</option>
+                    <option value="Strangford">Strangford</option>
+                    <option value="Stratford and Bow">Stratford and Bow</option>
+                    <option value="Stratford-on-Avon">Stratford-on-Avon</option>
+                    <option value="Streatham and Croydon North">Streatham and Croydon North</option>
+                    <option value="Stretford and Urmston">Stretford and Urmston</option>
+                    <option value="Stroud">Stroud</option>
+                    <option value="Suffolk Coastal">Suffolk Coastal</option>
+                    <option value="Sunderland Central">Sunderland Central</option>
+                    <option value="Surrey Heath">Surrey Heath</option>
+                    <option value="Sussex Weald">Sussex Weald</option>
+                    <option value="Sutton and Cheam">Sutton and Cheam</option>
+                    <option value="Sutton Coldfield">Sutton Coldfield</option>
+                    <option value="Swansea West">Swansea West</option>
+                    <option value="Swindon North">Swindon North</option>
+                    <option value="Swindon South">Swindon South</option>
+                    <option value="Tamworth">Tamworth</option>
+                    <option value="Tatton">Tatton</option>
+                    <option value="Taunton and Wellington">Taunton and Wellington</option>
+                    <option value="Telford">Telford</option>
+                    <option value="Tewkesbury">Tewkesbury</option>
+                    <option value="The Wrekin">The Wrekin</option>
+                    <option value="Thirsk and Malton">Thirsk and Malton</option>
+                    <option value="Thornbury and Yate">Thornbury and Yate</option>
+                    <option value="Thurrock">Thurrock</option>
+                    <option value="Tipton and Wednesbury">Tipton and Wednesbury</option>
+                    <option value="Tiverton and Minehead">Tiverton and Minehead</option>
+                    <option value="Tonbridge">Tonbridge</option>
+                    <option value="Tooting">Tooting</option>
+                    <option value="Torbay">Torbay</option>
+                    <option value="Torfaen">Torfaen</option>
+                    <option value="Torridge and Tavistock">Torridge and Tavistock</option>
+                    <option value="Tottenham">Tottenham</option>
+                    <option value="Truro and Falmouth">Truro and Falmouth</option>
+                    <option value="Tunbridge Wells">Tunbridge Wells</option>
+                    <option value="Twickenham">Twickenham</option>
+                    <option value="Tynemouth">Tynemouth</option>
+                    <option value="Upper Bann">Upper Bann</option>
+                    <option value="Uxbridge and South Ruislip">Uxbridge and South Ruislip</option>
+                    <option value="Vale of Glamorgan">Vale of Glamorgan</option>
+                    <option value="Vauxhall and Camberwell Green">Vauxhall and Camberwell Green</option>
+                    <option value="Wakefield and Rothwell">Wakefield and Rothwell</option>
+                    <option value="Wallasey">Wallasey</option>
+                    <option value="Walsall and Bloxwich">Walsall and Bloxwich</option>
+                    <option value="Walthamstow">Walthamstow</option>
+                    <option value="Warrington North">Warrington North</option>
+                    <option value="Warrington South">Warrington South</option>
+                    <option value="Warwick and Leamington">Warwick and Leamington</option>
+                    <option value="Washington and Gateshead South">Washington and Gateshead South</option>
+                    <option value="Watford">Watford</option>
+                    <option value="Waveney Valley">Waveney Valley</option>
+                    <option value="Weald of Kent">Weald of Kent</option>
+                    <option value="Wellingborough and Rushden">Wellingborough and Rushden</option>
+                    <option value="Wells and Mendip Hills">Wells and Mendip Hills</option>
+                    <option value="Welwyn Hatfield">Welwyn Hatfield</option>
+                    <option value="West Aberdeenshire and Kincardine">West Aberdeenshire and Kincardine</option>
+                    <option value="West Bromwich">West Bromwich</option>
+                    <option value="West Dorset">West Dorset</option>
+                    <option value="West Dunbartonshire">West Dunbartonshire</option>
+                    <option value="West Ham and Beckton">West Ham and Beckton</option>
+                    <option value="West Lancashire">West Lancashire</option>
+                    <option value="West Suffolk">West Suffolk</option>
+                    <option value="West Tyrone">West Tyrone</option>
+                    <option value="West Worcestershire">West Worcestershire</option>
+                    <option value="Westmorland and Lonsdale">Westmorland and Lonsdale</option>
+                    <option value="Weston-super-Mare">Weston-super-Mare</option>
+                    <option value="Wetherby and Easingwold">Wetherby and Easingwold</option>
+                    <option value="Whitehaven and Workington">Whitehaven and Workington</option>
+                    <option value="Widnes and Halewood">Widnes and Halewood</option>
+                    <option value="Wigan">Wigan</option>
+                    <option value="Wimbledon">Wimbledon</option>
+                    <option value="Winchester">Winchester</option>
+                    <option value="Windsor">Windsor</option>
+                    <option value="Wirral West">Wirral West</option>
+                    <option value="Witham">Witham</option>
+                    <option value="Witney">Witney</option>
+                    <option value="Woking">Woking</option>
+                    <option value="Wokingham">Wokingham</option>
+                    <option value="Wolverhampton North East">Wolverhampton North East</option>
+                    <option value="Wolverhampton South East">Wolverhampton South East</option>
+                    <option value="Wolverhampton West">Wolverhampton West</option>
+                    <option value="Worcester">Worcester</option>
+                    <option value="Worsley and Eccles">Worsley and Eccles</option>
+                    <option value="Worthing West">Worthing West</option>
+                    <option value="Wrexham">Wrexham</option>
+                    <option value="Wycombe">Wycombe</option>
+                    <option value="Wyre Forest">Wyre Forest</option>
+                    <option value="Wythenshawe and Sale East">Wythenshawe and Sale East</option>
+                    <option value="Yeovil">Yeovil</option>
+                    <option value="Ynys Môn">Ynys Môn</option>
+                    <option value="York Central">York Central</option>
+                    <option value="York Outer">York Outer</option>
+                    <!-- Add more constituencies here -->
+                </select>
+
+                <label for="name">Person's Name:</label>
+                <input type="text" id="name" readonly>
+
+                <label for="email">Email Address:</label>
+                <input type="text" id="email" readonly>
+
+                <label for="subject">Email Subject:</label>
+                <input type="text" id="subject" value="Vote of No Confidence in Prime Minister Keir Starmer">
+
+                <label for="body">Email Body:</label>
+                <textarea id="body" rows="10">Dear [Name],
+
+                I hope this message finds you well.
+
+                I am writing to express my concerns about the leadership of Prime Minister Keir Starmer. During his time in office, I feel there have been several issues that have yet to be addressed effectively and have had a significant impact on the country.
+                
+                One area of concern is the ongoing issue of child sexual exploitation, which has caused widespread harm. Despite investigations and numerous calls for action, there have been instances where progress on ensuring justice for victims has been slower than expected. It is vital that these issues are dealt with decisively and that those responsible are held accountable.
+                
+                Additionally, I am worried about what appears to be a growing disparity in the approach to policing in different communities. Many people are feeling that the law is not always applied equally, which has contributed to a sense of frustration and mistrust toward law enforcement.
+                
+                I am also concerned about the increasing number of prosecutions related to social media posts. While it is important to maintain standards of conduct, it seems that the balance between protecting free speech and enforcing rules is becoming harder to achieve. The protection of fundamental freedoms, including the right to express opinions, must remain a priority.
+                
+                Furthermore, there is widespread sentiment among the public that the Prime Minister has failed to deliver on many of the promises he made during his election campaign. Many feel that these commitments have not been fulfilled, and trust in his leadership has been shaken as a result.
+
+                Given these issues, I respectfully ask you to consider supporting a vote of no confidence in Prime Minister Keir Starmer. I believe the UK needs leadership that ensures the safety, justice, and rights of its citizens are upheld.
+                
+                Thank you for considering my concerns. I trust that you will continue to represent the views of your constituents and take the necessary steps to hold the government accountable.
+                
+                Yours sincerely,</textarea>
+
+                <button type="button" onclick="generateEmail()">Generate Email</button>
+            </form>
+        </div>
+    </div>
+     
+
+    <script>
+        // Mapping of constituencies to email addresses and names
+        const constituencyData = {
+            "Hackney North and Stoke Newington": {
+                "email": "diane.abbott.office@parliament.uk",
+                "name": "Ms Diane Abbott"
+            },
+            "Ipswich": {
+                "email": "jack.abbott.mp@parliament.uk",
+                "name": "Jack Abbott"
+            },
+            "Oldham East and Saddleworth": {
+                "email": "abrahamsd@parliament.uk",
+                "name": "Debbie Abrahams"
+            },
+            "Leicester South": {
+                "email": "shockat.adam.mp@parliament.uk",
+                "name": "Shockat Adam"
+            },
+            "Glasgow South West": {
+                "email": "zubir.ahmed.mp@parliament.uk",
+                "name": "Dr Zubir Ahmed"
+            },
+            "North Durham": {
+                "email": "luke.akehurst.mp@parliament.uk",
+                "name": "Luke Akehurst"
+            },
+            "Southend East and Rochford": {
+                "email": "bayo.alaba.mp@parliament.uk",
+                "name": "Mr Bayo Alaba"
+            },
+            "Weston-super-Mare": {
+                "email": "daniel.aldridge.mp@parliament.uk",
+                "name": "Dan Aldridge"
+            },
+            "Lothian East": {
+                "email": "douglas.alexander.mp@parliament.uk",
+                "name": "Mr Douglas Alexander"
+            },
+            "Swindon South": {
+                "email": "heidi.alexander.mp@parliament.uk",
+                "name": "Heidi Alexander"
+            },
+            "North Somerset": {
+                "email": "sadik.alhassan.mp@parliament.uk",
+                "name": "Sadik Al-Hassan"
+            },
+            "Bethnal Green and Stepney": {
+                "email": "rushanara.ali.mp@parliament.uk",
+                "name": "Rushanara Ali"
+            },
+            "Birmingham Hall Green and Moseley": {
+                "email": "tahir.ali.mp@parliament.uk",
+                "name": "Tahir Ali"
+            },
+            "Tooting": {
+                "email": "rosena.allinkhan.mp@parliament.uk",
+                "name": "Dr Rosena Allin-Khan"
+            },
+            "North Antrim": {
+                "email": "jim.allister.mp@parliament.uk",
+                "name": "Jim Allister"
+            },
+            "Runcorn and Helsby": {
+                "email": "mike.amesbury.mp@parliament.uk",
+                "name": "Mike Amesbury"
+            },
+            "Taunton and Wellington": {
+                "email": "gideon.amos.mp@parliament.uk",
+                "name": "Mr Gideon Amos"
+            },
+            "Buckingham and Bletchley": {
+                "email": "callum.anderson.mp@parliament.uk",
+                "name": "Callum Anderson"
+            },
+            "Putney": {
+                "email": "fleur.anderson.mp@parliament.uk",
+                "name": "Fleur Anderson"
+            },
+            "Ashfield": {
+                "email": "lee.anderson.mp@parliament.uk",
+                "name": "Lee Anderson"
+            },
+            "South Shropshire": {
+                "email": "stuart.anderson.mp@parliament.uk",
+                "name": "Stuart Anderson"
+            },
+            "Daventry": {
+                "email": "stuart.andrew.mp@parliament.uk",
+                "name": "Stuart Andrew"
+            },
+            "Gower": {
+                "email": "tonia.antoniazzi.mp@parliament.uk",
+                "name": "Tonia Antoniazzi"
+            },
+            "North Norfolk": {
+                "email": "steff.aquarone.mp@parliament.uk",
+                "name": "Steff Aquarone"
+            },
+            "Melton and Syston": {
+                "email": "edward.argar.mp@parliament.uk",
+                "name": "Edward Argar"
+            },
+            "Edinburgh South West": {
+                "email": "scott.arthur.mp@parliament.uk",
+                "name": "Dr Scott Arthur"
+            },
+            "Lowestoft": {
+                "email": "jess.asato.mp@parliament.uk",
+                "name": "Jess Asato"
+            },
+            "West Ham and Beckton": {
+                "email": "james.asser.mp@parliament.uk",
+                "name": "James Asser"
+            },
+            "Ilford South": {
+                "email": "jas.athwal.mp@parliament.uk",
+                "name": "Jas Athwal"
+            },
+            "Louth and Horncastle": {
+                "email": "Victoria@victoriaatkins.org.uk",
+                "name": "Victoria Atkins"
+            },
+            "Derby North": {
+                "email": "catherine.atkinson.mp@parliament.uk",
+                "name": "Catherine Atkinson"
+            },
+            "Sunderland Central": {
+                "email": "lewis.atkinson.mp@parliament.uk",
+                "name": "Lewis Atkinson"
+            },
+            "Eastbourne": {
+                "email": "josh.babarinde.mp@parliament.uk",
+                "name": "Josh Babarinde"
+            },
+            "Orpington": {
+                "email": "gareth.bacon.mp@parliament.uk",
+                "name": "Gareth Bacon"
+            },
+            "North West Essex": {
+                "email": "kemi.badenoch.mp@parliament.uk",
+                "name": "Mrs Kemi Badenoch"
+            },
+            "Leyton and Wanstead": {
+                "email": "calvin.bailey.mp@parliament.uk",
+                "name": "Mr Calvin Bailey"
+            },
+            "Reading West and Mid Berkshire": {
+                "email": "olivia.bailey.mp@parliament.uk",
+                "name": "Olivia Bailey"
+            },
+            "St Helens North": {
+                "email": "david.baines.mp@parliament.uk",
+                "name": "David Baines"
+            },
+            "Aldershot": {
+                "email": "alex.baker.mp@parliament.uk",
+                "name": "Alex Baker"
+            },
+            "Glenrothes and Mid Fife": {
+                "email": "richard.baker.mp@parliament.uk",
+                "name": "Richard Baker"
+            },
+            "West Worcestershire": {
+                "email": "harriett.baldwin.mp@parliament.uk",
+                "name": "Dame Harriett Baldwin"
+            },
+            "Halesowen": {
+                "email": "alex.ballinger.mp@parliament.uk",
+                "name": "Alex Ballinger"
+            },
+            "Tipton and Wednesbury": {
+                "email": "antonia.bance.mp@parliament.uk",
+                "name": "Antonia Bance"
+            },
+            "North East Cambridgeshire": {
+                "email": "stephen.barclay.mp@parliament.uk",
+                "name": "Steve Barclay"
+            },
+            "Liverpool Wavertree": {
+                "email": "paula.barker.mp@parliament.uk",
+                "name": "Paula Barker"
+            },
+            "Corby and East Northamptonshire": {
+                "email": "lee.barron.mp@parliament.uk",
+                "name": "Lee Barron"
+            },
+            "Cardiff West": {
+                "email": "alex.barroscurtis.mp@parliament.uk",
+                "name": "Mr Alex Barros-Curtis"
+            },
+            "Paisley and Renfrewshire South": {
+                "email": "johanna.baxter.mp@parliament.uk",
+                "name": "Johanna Baxter"
+            },
+            "Uxbridge and South Ruislip": {
+                "email": "danny.beales.mp@parliament.uk",
+                "name": "Danny Beales"
+            },
+            "Blackpool North and Fleetwood": {
+                "email": "lorraine.beavers.mp@parliament.uk",
+                "name": "Lorraine Beavers"
+            },
+            "Mid Leicestershire": {
+                "email": "peter.bedford.mp@parliament.uk",
+                "name": "Mr Peter Bedford"
+            },
+            "Poplar and Limehouse": {
+                "email": "apsana.begum.mp@parliament.uk",
+                "name": "Apsana Begum"
+            },
+            "Swansea West": {
+                "email": "torsten.bell.mp@parliament.uk",
+                "name": "Torsten Bell"
+            },
+            "Leeds South": {
+                "email": "bennh@parliament.uk",
+                "name": "Hilary Benn"
+            },
+            "Mid Sussex": {
+                "email": "alison.bennett.mp@parliament.uk",
+                "name": "Alison Bennett"
+            },
+            "Brighton Pavilion": {
+                "email": "sian.berry.mp@parliament.uk",
+                "name": "Siân Berry"
+            },
+            "Sheffield South East": {
+                "email": "officeofclivebettsmp@parliament.uk",
+                "name": "Mr Clive Betts"
+            },
+            "Meriden and Solihull East": {
+                "email": "saqib.bhatti@parliament.uk",
+                "name": "Saqib Bhatti"
+            },
+            "East Thanet": {
+                "email": "polly.billington.mp@parliament.uk",
+                "name": "Ms Polly Billington"
+            },
+            "Forest of Dean": {
+                "email": "matt.bishop.mp@parliament.uk",
+                "name": "Matt Bishop"
+            },
+            "Harrow East": {
+                "email": "bob.blackman.mp@parliament.uk",
+                "name": "Bob Blackman"
+            },
+            "Aberdeen North": {
+                "email": "kirsty.blackman.mp@parliament.uk",
+                "name": "Kirsty Blackman"
+            },
+            "Sheffield Hallam": {
+                "email": "olivia.blake.mp@parliament.uk",
+                "name": "Olivia Blake"
+            },
+            "Cities of London and Westminster": {
+                "email": "rachel.blake.mp@parliament.uk",
+                "name": "Rachel Blake"
+            },
+            "Redditch": {
+                "email": "chris.bloore.mp@parliament.uk",
+                "name": "Chris Bloore"
+            },
+            "Heywood and Middleton North": {
+                "email": "elsie.blundell.mp@parliament.uk",
+                "name": "Mrs Elsie Blundell"
+            },
+            "Stevenage": {
+                "email": "kevin.bonavia.mp@parliament.uk",
+                "name": "Kevin Bonavia"
+            },
+            "South Northamptonshire": {
+                "email": "sarah.bool.mp@parliament.uk",
+                "name": "Sarah Bool"
+            },
+            "Ossett and Denby Dale": {
+                "email": "jade.botterill.mp@parliament.uk",
+                "name": "Jade Botterill"
+            },
+            "West Aberdeenshire and Kincardine": {
+                "email": "andrew.bowie.mp@parliament.uk",
+                "name": "Andrew Bowie"
+            },
+            "Wolverhampton North East": {
+                "email": "sureena.brackenridge.mp@parliament.uk",
+                "name": "Mrs Sureena Brackenridge"
+            },
+            "Staffordshire Moorlands": {
+                "email": "karen.bradley.mp@parliament.uk",
+                "name": "Dame Karen Bradley"
+            },
+            "Chester South and Eddisbury": {
+                "email": "aphra.brandreth.mp@parliament.uk",
+                "name": "Aphra Brandreth"
+            },
+            "Hartlepool": {
+                "email": "jonathan.brash.mp@parliament.uk",
+                "name": "Mr Jonathan Brash"
+            },
+            "Fareham and Waterlooville": {
+                "email": "suella.braverman.mp@parliament.uk",
+                "name": "Suella Braverman"
+            },
+            "North East Hampshire": {
+                "email": "alex.brewer.mp@parliament.uk",
+                "name": "Alex Brewer"
+            },
+            "Bolton West": {
+                "email": "phil.brickell.mp@parliament.uk",
+                "name": "Phil Brickell"
+            },
+            "Chichester": {
+                "email": "jess.brownfuller.mp@parliament.uk",
+                "name": "Jess Brown-Fuller"
+            },
+            "Rhondda and Ogmore": {
+                "email": "chris.bryant.mp@parliament.uk",
+                "name": "Chris Bryant"
+            },
+            "Shrewsbury": {
+                "email": "julia.buckley.mp@parliament.uk",
+                "name": "Julia Buckley"
+            },
+            "Brentwood and Ongar": {
+                "email": "alex.burghart.mp@parliament.uk",
+                "name": "Alex Burghart"
+            },
+            "Leeds East": {
+                "email": "richard@richardburgon.com",
+                "name": "Richard Burgon"
+            },
+            "Glasgow North East": {
+                "email": "maureen.burke.mp@parliament.uk",
+                "name": "Maureen Burke"
+            },
+            "Southend West and Leigh": {
+                "email": "david.burtonsampson.mp@parliament.uk",
+                "name": "David Burton-Sampson"
+            },
+            "Brent East": {
+                "email": "dawn.butler.mp@parliament.uk",
+                "name": "Dawn Butler"
+            },
+            "Liverpool West Derby": {
+                "email": "ian.byrne.mp@parliament.uk",
+                "name": "Ian Byrne"
+            },
+            "Birmingham Hodge Hill and Solihull North": {
+                "email": "liam.byrne.mp@parliament.uk",
+                "name": "Liam Byrne"
+            },
+            "Brentford and Isleworth": {
+                "email": "ruthcadburymp@parliament.uk",
+                "name": "Ruth Cadbury"
+            },
+            "Barking": {
+                "email": "nesil.caliskan.mp@parliament.uk",
+                "name": "Nesil Caliskan"
+            },
+            "Tynemouth": {
+                "email": "alan.campbell.mp@parliament.uk",
+                "name": "Sir Alan Campbell"
+            },
+            "East Londonderry": {
+                "email": "aaron.callan@parliament.uk",
+                "name": "Mr Gregory Campbell"
+            },
+            "North Ayrshire and Arran": {
+                "email": "irene.campbell.mp@parliament.uk",
+                "name": "Irene Campbell"
+            },
+            "Broxtowe": {
+                "email": "juliet.campbell.mp@parliament.uk",
+                "name": "Juliet Campbell"
+            },
+            "Penrith and Solway": {
+                "email": "markus.campbellsavours.mp@parliament.uk",
+                "name": "Markus Campbell-Savours"
+            },
+            "Ely and East Cambridgeshire": {
+                "email": "charlotte.cane.mp@parliament.uk",
+                "name": "Charlotte Cane"
+            },
+            "Liverpool Walton": {
+                "email": "dan.carden.mp@parliament.uk",
+                "name": "Dan Carden"
+            },
+            "North West Cambridgeshire": {
+                "email": "sam.carling.mp@parliament.uk",
+                "name": "Sam Carling"
+            },
+            "Orkney and Shetland": {
+                "email": "carmichaela@parliament.uk",
+                "name": "Mr Alistair Carmichael"
+            },
+            "Birmingham Selly Oak": {
+                "email": "al.carns.mp@parliament.uk",
+                "name": "Al Carns"
+            },
+            "South Suffolk": {
+                "email": "james.cartlidge.mp@parliament.uk",
+                "name": "James Cartlidge"
+            },
+            "Brecon, Radnor and Cwm Tawe": {
+                "email": "david.chadwick.mp@parliament.uk",
+                "name": "David Chadwick"
+            },
+            "North East Fife": {
+                "email": "wendy.chamberlain.mp@parliament.uk",
+                "name": "Wendy Chamberlain"
+            },
+            "Winchester": {
+                "email": "danny.chambers.mp@parliament.uk",
+                "name": "Dr Danny Chambers"
+            },
+            "Rotherham": {
+                "email": "sarah.champion.mp@parliament.uk",
+                "name": "Sarah Champion"
+            },
+            "Southgate and Wood Green": {
+                "email": "bambos.charalambous.mp@parliament.uk",
+                "name": "Bambos Charalambous"
+            },
+            "York Outer": {
+                "email": "luke.charters.mp@parliament.uk",
+                "name": "Mr Luke Charters"
+            },
+            "Christchurch": {
+                "email": "chopec@parliament.uk",
+                "name": "Sir Christopher Chope"
+            },
+            "North Herefordshire": {
+                "email": "ellie.chowns.mp@parliament.uk",
+                "name": "Ellie Chowns"
+            },
+            "Enfield North": {
+                "email": "feryal.clark.mp@parliament.uk",
+                "name": "Feryal Clark"
+            },
+            "Braintree": {
+                "email": "james.cleverly.mp@parliament.uk",
+                "name": "Mr James Cleverly"
+            },
+            "North Cotswolds": {
+                "email": "cliftonbrowng@parliament.uk",
+                "name": "Sir Geoffrey Clifton-Brown"
+            },
+            "Broxbourne": {
+                "email": "lewis.cocking.mp@parliament.uk",
+                "name": "Lewis Cocking"
+            },
+            "Dorking and Horley": {
+                "email": "chris.coghlan.mp@parliament.uk",
+                "name": "Chris Coghlan"
+            },
+            "Chelsea and Fulham": {
+                "email": "ben.coleman.mp@parliament.uk",
+                "name": "Ben Coleman"
+            },
+            "Burton and Uttoxeter": {
+                "email": "jacob.collier.mp@parliament.uk",
+                "name": "Jacob Collier"
+            },
+            "Morecambe and Lunesdale": {
+                "email": "lizzi.collinge.mp@parliament.uk",
+                "name": "Lizzi Collinge"
+            },
+            "Worcester": {
+                "email": "tom.collins.mp@parliament.uk",
+                "name": "Tom Collins"
+            },
+            "Harpenden and Berkhamsted": {
+                "email": "victoria.collins.mp@parliament.uk",
+                "name": "Victoria Collins"
+            },
+            "Beckenham and Penge": {
+                "email": "liam.conlon.mp@parliament.uk",
+                "name": "Liam Conlon"
+            },
+            "West Bromwich": {
+                "email": "sarah.coombes.mp@parliament.uk",
+                "name": "Sarah Coombes"
+            },
+            "Mid Cheshire": {
+                "email": "andrew.cooper.mp@parliament.uk",
+                "name": "Andrew Cooper"
+            },
+            "Worthing West": {
+                "email": "beccy.cooper.mp@parliament.uk",
+                "name": "Dr Beccy Cooper"
+            },
+            "St Albans": {
+                "email": "daisy.cooper.mp@parliament.uk",
+                "name": "Daisy Cooper"
+            },
+            "Dumfries and Galloway": {
+                "email": "john.cooper.mp@parliament.uk",
+                "name": "John Cooper"
+            },
+            "Pontefract, Castleford and Knottingley": {
+                "email": "coopery@parliament.uk",
+                "name": "Yvette Cooper"
+            },
+            "Islington North": {
+                "email": "jeremy.corbyn.mp@parliament.uk",
+                "name": "Jeremy Corbyn"
+            },
+            "South Leicestershire": {
+                "email": "alberto.costa.mp@parliament.uk",
+                "name": "Alberto Costa"
+            },
+            "Ealing Southall": {
+                "email": "deirdre.costigan.mp@parliament.uk",
+                "name": "Deirdre Costigan"
+            },
+            "East Surrey": {
+                "email": "claire.coutinho.mp@parliament.uk",
+                "name": "Claire Coutinho"
+            },
+            "Torridge and Tavistock": {
+                "email": "coxg@parliament.uk",
+                "name": "Sir Geoffrey Cox"
+            },
+            "Colchester": {
+                "email": "pam.cox.mp@parliament.uk",
+                "name": "Pam Cox"
+            },
+            "Bermondsey and Old Southwark": {
+                "email": "neil.coyle.mp@parliament.uk",
+                "name": "Neil Coyle"
+            },
+            "Thurrock": {
+                "email": "jen.craft.mp@parliament.uk",
+                "name": "Jen Craft"
+            },
+            "Coventry East": {
+                "email": "mary.creagh.mp@parliament.uk",
+                "name": "Mary Creagh"
+            },
+            "Walthamstow": {
+                "email": "stella.creasy.mp@parliament.uk",
+                "name": "Ms Stella Creasy"
+            },
+            "Na h-Eileanan an Iar": {
+                "email": "torcuil.crichton.mp@parliament.uk",
+                "name": "Torcuil Crichton"
+            },
+            "Gordon and Buchan": {
+                "email": "harriet.cross.mp@parliament.uk",
+                "name": "Harriet Cross"
+            },
+            "Fermanagh and South Tyrone": {
+                "email": "pat.cullen.mp@parliament.uk",
+                "name": "Pat Cullen"
+            },
+            "Bradford South": {
+                "email": "judith.cummins.mp@parliament.uk",
+                "name": "Judith Cummins"
+            },
+            "Milton Keynes North": {
+                "email": "chris.curtis.mp@parliament.uk",
+                "name": "Chris Curtis"
+            },
+            "Lewisham East": {
+                "email": "janet.daby.mp@parliament.uk",
+                "name": "Janet Daby"
+            },
+            "Scunthorpe": {
+                "email": "nic.dakin.mp@parliament.uk",
+                "name": "Sir Nicholas Dakin"
+            },
+            "West Lancashire": {
+                "email": "ashley.dalton.mp@parliament.uk",
+                "name": "Ashley Dalton"
+            },
+            "Yeovil": {
+                "email": "adam.dance.mp@parliament.uk",
+                "name": "Adam Dance"
+            },
+            "Torbay": {
+                "email": "steve.darling.mp@parliament.uk",
+                "name": "Steve Darling"
+            },
+            "Milton Keynes Central": {
+                "email": "emily.darlington.mp@parliament.uk",
+                "name": "Emily Darlington"
+            },
+            "Kingston and Surbiton": {
+                "email": "edward.davey.mp@parliament.uk",
+                "name": "Ed Davey"
+            },
+            "Caerfyrddin": {
+                "email": "ann.davies.mp@parliament.uk",
+                "name": "Ann Davies"
+            },
+            "Grantham and Bourne": {
+                "email": "gareth.davies.mp@parliament.uk",
+                "name": "Gareth Davies"
+            },
+            "Mid Derbyshire": {
+                "email": "jonathan.davies.mp@parliament.uk",
+                "name": "Jonathan Davies"
+            },
+            "East Grinstead and Uckfield": {
+                "email": "mims.davies.mp@parliament.uk",
+                "name": "Mims Davies"
+            },
+            "Colne Valley": {
+                "email": "paul.davies.mp@parliament.uk",
+                "name": "Paul Davies"
+            },
+            "Telford": {
+                "email": "shaun.davies.mp@parliament.uk",
+                "name": "Shaun Davies"
+            },
+            "Pontypridd": {
+                "email": "alex.daviesjones.mp@parliament.uk",
+                "name": "Alex Davies-Jones"
+            },
+            "Goole and Pocklington": {
+                "email": "david.davis.mp@parliament.uk",
+                "name": "David Davis"
+            },
+            "Battersea": {
+                "email": "marsha.decordova.mp@parliament.uk",
+                "name": "Marsha De Cordova"
+            },
+            "Carshalton and Wallington": {
+                "email": "bobby.dean.mp@parliament.uk",
+                "name": "Bobby Dean"
+            },
+            "Hertford and Stortford": {
+                "email": "josh.dean.mp@parliament.uk",
+                "name": "Josh Dean"
+            },
+            "Halifax": {
+                "email": "kate.dearden.mp@parliament.uk",
+                "name": "Kate Dearden"
+            },
+            "Bristol Central": {
+                "email": "carla.denyer.mp@parliament.uk",
+                "name": "Carla Denyer"
+            },
+            "Bridlington and The Wolds": {
+                "email": "charlie.dewhirst.mp@parliament.uk",
+                "name": "Charlie Dewhirst"
+            },
+            "Slough": {
+                "email": "tan.dhesi.mp@parliament.uk",
+                "name": "Mr Tanmanjeet Singh Dhesi"
+            },
+            "Dartford": {
+                "email": "jim.dickson.mp@parliament.uk",
+                "name": "Jim Dickson"
+            },
+            "Newbury": {
+                "email": "lee.dillon.mp@parliament.uk",
+                "name": "Mr Lee Dillon"
+            },
+            "Gosport": {
+                "email": "caroline.dinenage.mp@parliament.uk",
+                "name": "Dame Caroline Dinenage"
+            },
+            "Shipley": {
+                "email": "anna.dixon.mp@parliament.uk",
+                "name": "Anna Dixon"
+            },
+            "Chester North and Neston": {
+                "email": "Samantha.dixon.mp@parliament.uk",
+                "name": "Samantha Dixon"
+            },
+            "Oxford East": {
+                "email": "anneliese.dodds.mp@parliament.uk",
+                "name": "Anneliese Dodds"
+            },
+            "Hastings and Rye": {
+                "email": "helena.dollimore.mp@parliament.uk",
+                "name": "Helena Dollimore"
+            },
+            "Angus and Perthshire Glens": {
+                "email": "dave.doogan.mp@parliament.uk",
+                "name": "Dave Doogan"
+            },
+            "Cardiff South and Penarth": {
+                "email": "stephen.doughty.mp@parliament.uk",
+                "name": "Stephen Doughty"
+            },
+            "Bootle": {
+                "email": "peter.dowd.mp@parliament.uk",
+                "name": "Peter Dowd"
+            },
+            "Hertsmere": {
+                "email": "oliver.dowden.mp@parliament.uk",
+                "name": "Sir Oliver Dowden"
+            },
+            "Dunfermline and Dollar": {
+                "email": "graeme.downie.mp@parliament.uk",
+                "name": "Graeme Downie"
+            },
+            "Canterbury": {
+                "email": "rosie.duffield.mp@parliament.uk",
+                "name": "Rosie Duffield"
+            },
+            "Chingford and Woodford Green": {
+                "email": "Iain.duncansmith.mp@parliament.uk",
+                "name": "Sir Iain Duncan Smith"
+            },
+            "Poole": {
+                "email": "neil.duncanjordan.mp@parliament.uk",
+                "name": "Neil Duncan-Jordan"
+            },
+            "Glastonbury and Somerton": {
+                "email": "sarah.dyke.mp@parliament.uk",
+                "name": "Sarah Dyke"
+            },
+            "Wallasey": {
+                "email": "eaglea@parliament.uk",
+                "name": "Dame Angela Eagle"
+            },
+            "Liverpool Garston": {
+                "email": "maria.eagle.mp@parliament.uk",
+                "name": "Maria Eagle"
+            },
+            "North Down": {
+                "email": "alex.easton.mp@parliament.uk",
+                "name": "Alex Easton"
+            },
+            "Foyle": {
+                "email": "colum.eastwood.mp@parliament.uk",
+                "name": "Colum Eastwood"
+            },
+            "Lagan Valley": {
+                "email": "sorcha.eastwood.mp@parliament.uk",
+                "name": "Sorcha Eastwood"
+            },
+            "Stourbridge": {
+                "email": "cat.eccles.mp@parliament.uk",
+                "name": "Cat Eccles"
+            },
+            "Rochester and Strood": {
+                "email": "lauren.edwards.mp@parliament.uk",
+                "name": "Lauren Edwards"
+            },
+            "Tamworth": {
+                "email": "sarah.edwards.mp@parliament.uk",
+                "name": "Sarah Edwards"
+            },
+            "Bristol North East": {
+                "email": "damien.egan.mp@parliament.uk",
+                "name": "Damien Egan"
+            },
+            "Ribble Valley": {
+                "email": "maya.ellis.mp@parliament.uk",
+                "name": "Maya Ellis"
+            },
+            "Bridgend": {
+                "email": "Chris.Elmore.mp@parliament.uk",
+                "name": "Chris Elmore"
+            },
+            "Bolton North East": {
+                "email": "kirith.entwistle.mp@parliament.uk",
+                "name": "Kirith Entwistle"
+            },
+            "Vauxhall and Camberwell Green": {
+                "email": "florence.eshalomi.mp@parliament.uk",
+                "name": "Florence Eshalomi"
+            },
+            "Sefton Central": {
+                "email": "bill.esterson.mp@parliament.uk",
+                "name": "Bill Esterson"
+            },
+            "Caerphilly": {
+                "email": "chris.evans.mp@parliament.uk",
+                "name": "Chris Evans"
+            },
+            "Hinckley and Bosworth": {
+                "email": "luke.evans.mp@parliament.uk",
+                "name": "Dr Luke Evans"
+            },
+            "Peckham": {
+                "email": "miatta.fahnbulleh.mp@parliament.uk",
+                "name": "Miatta Fahnbulleh"
+            },
+            "Lincoln": {
+                "email": "hamish.falconer.mp@parliament.uk",
+                "name": "Mr Hamish Falconer"
+            },
+            "Clacton": {
+                "email": "nigel.farage.mp@parliament.uk",
+                "name": "Nigel Farage"
+            },
+            "Amber Valley": {
+                "email": "linsey.farnsworth.mp@parliament.uk",
+                "name": "Linsey Farnsworth"
+            },
+            "Westmorland and Lonsdale": {
+                "email": "farront@parliament.uk",
+                "name": "Tim Farron"
+            },
+            "Calder Valley": {
+                "email": "josh.fentonglynn.mp@parliament.uk",
+                "name": "Josh Fenton-Glynn"
+            },
+            "Gateshead Central and Whickham": {
+                "email": "mark.ferguson.mp@parliament.uk",
+                "name": "Mark Ferguson"
+            },
+            "Glasgow West": {
+                "email": "patricia.ferguson.mp@parliament.uk",
+                "name": "Patricia Ferguson"
+            },
+            "Belfast North": {
+                "email": "john.finucane.mp@parliament.uk",
+                "name": "John Finucane"
+            },
+            "Bolsover": {
+                "email": "natalie.fleet.mp@parliament.uk",
+                "name": "Natalie Fleet"
+            },
+            "Aberdeen South": {
+                "email": "stephen.flynn.mp@parliament.uk",
+                "name": "Stephen Flynn"
+            },
+            "Cramlington and Killingworth": {
+                "email": "emma.foody.mp@parliament.uk",
+                "name": "Emma Foody"
+            },
+            "Monmouthshire": {
+                "email": "catherine.fookes.mp@parliament.uk",
+                "name": "Catherine Fookes"
+            },
+            "Honiton and Sidmouth": {
+                "email": "richard.foord.mp@parliament.uk",
+                "name": "Richard Foord"
+            },
+            "Woking": {
+                "email": "will.forster.mp@parliament.uk",
+                "name": "Mr Will Forster"
+            },
+            "Bromley and Biggin Hill": {
+                "email": "peter.fortune.mp@parliament.uk",
+                "name": "Peter Fortune"
+            },
+            "South Ribble": {
+                "email": "paul.foster.mp@parliament.uk",
+                "name": "Mr Paul Foster"
+            },
+            "Bridgwater": {
+                "email": "ashley.fox.mp@parliament.uk",
+                "name": "Sir Ashley Fox"
+            },
+            "Lewisham North": {
+                "email": "vicky.foxcroft.mp@parliament.uk",
+                "name": "Vicky Foxcroft"
+            },
+            "City of Durham": {
+                "email": "mary.foy.mp@parliament.uk",
+                "name": "Mary Kelly Foy"
+            },
+            "Bexleyheath and Crayford": {
+                "email": "daniel.francis.mp@parliament.uk",
+                "name": "Daniel Francis"
+            },
+            "Rayleigh and Wickford": {
+                "email": "mark.francois.mp@parliament.uk",
+                "name": "Mr Mark Francois"
+            },
+            "Guildford": {
+                "email": "zoe.franklin.mp@parliament.uk",
+                "name": "Zöe Franklin"
+            },
+            "Mid Norfolk": {
+                "email": "george.freeman.mp@parliament.uk",
+                "name": "George Freeman"
+            },
+            "Old Bexley and Sidcup": {
+                "email": "louie.french.mp@parliament.uk",
+                "name": "Mr Louie French"
+            },
+            "Bury North": {
+                "email": "james.frith.mp@parliament.uk",
+                "name": "Mr James Frith"
+            },
+            "North Bedfordshire": {
+                "email": "richard.fuller.mp@parliament.uk",
+                "name": "Richard Fuller"
+            },
+            "Sheffield Brightside and Hillsborough": {
+                "email": "gill.furniss.mp@parliament.uk",
+                "name": "Gill Furniss"
+            },
+            "Herne Bay and Sandwich": {
+                "email": "galerj@parliament.uk",
+                "name": "Sir Roger Gale"
+            },
+            "Brent West": {
+                "email": "barry.gardiner.mp@parliament.uk",
+                "name": "Barry Gardiner"
+            },
+            "Stoke-on-Trent South": {
+                "email": "allison.gardner.mp@parliament.uk",
+                "name": "Dr Allison Gardner"
+            },
+            "Wyre Forest": {
+                "email": "mark.garnier.mp@parliament.uk",
+                "name": "Mark Garnier"
+            },
+            "South East Cornwall": {
+                "email": "anna.gelderd.mp@parliament.uk",
+                "name": "Anna Gelderd"
+            },
+            "Central Ayrshire": {
+                "email": "alan.gemmell.mp@parliament.uk",
+                "name": "Alan Gemmell"
+            },
+            "St Ives": {
+                "email": "andrew.george.mp@parliament.uk",
+                "name": "Andrew George"
+            },
+            "Clwyd North": {
+                "email": "gill.german.mp@parliament.uk",
+                "name": "Gill German"
+            },
+            "Arbroath and Broughty Ferry": {
+                "email": "stephen.gethins.mp@parliament.uk",
+                "name": "Stephen Gethins"
+            },
+            "Sussex Weald": {
+                "email": "nusrat.ghani.mp@parliament.uk",
+                "name": "Ms Nusrat Ghani"
+            },
+            "Chippenham": {
+                "email": "sarah.gibson.mp@parliament.uk",
+                "name": "Sarah Gibson"
+            },
+            "Edinburgh North and Leith": {
+                "email": "tracy.gilbert.mp@parliament.uk",
+                "name": "Tracy Gilbert"
+            },
+            "Birmingham Edgbaston": {
+                "email": "preet.gill.mp@parliament.uk",
+                "name": "Preet Kaur Gill"
+            },
+            "Tiverton and Minehead": {
+                "email": "rachel.gilmour.mp@parliament.uk",
+                "name": "Rachel Gilmour"
+            },
+            "Clwyd East": {
+                "email": "becky.gittins.mp@parliament.uk",
+                "name": "Becky Gittins"
+            },
+            "Salisbury": {
+                "email": "john.glen.mp@parliament.uk",
+                "name": "John Glen"
+            },
+            "Newcastle upon Tyne East and Wallsend": {
+                "email": "mary.glindon.mp@parliament.uk",
+                "name": "Mary Glindon"
+            },
+            "Didcot and Wantage": {
+                "email": "olly.glover.mp@parliament.uk",
+                "name": "Olly Glover"
+            },
+            "Chelmsford": {
+                "email": "marie.goldman.mp@parliament.uk",
+                "name": "Marie Goldman"
+            },
+            "South Norfolk": {
+                "email": "ben.goldsborough.mp@parliament.uk",
+                "name": "Ben Goldsborough"
+            },
+            "Harrogate and Knaresborough": {
+                "email": "tom.gordon.mp@parliament.uk",
+                "name": "Tom Gordon"
+            },
+            "Nuneaton": {
+                "email": "jodie.gosling.mp@parliament.uk",
+                "name": "Jodie Gosling"
+            },
+            "Queen's Park and Maida Vale": {
+                "email": "georgia.gould.mp@parliament.uk",
+                "name": "Georgia Gould"
+            },
+            "Glasgow East": {
+                "email": "john.grady.mp@parliament.uk",
+                "name": "John Grady"
+            },
+            "Maidstone and Malling": {
+                "email": "helen.grant.mp@parliament.uk",
+                "name": "Helen Grant"
+            },
+            "Chesham and Amersham": {
+                "email": "sarah.green.mp@parliament.uk",
+                "name": "Sarah Green"
+            },
+            "Nottingham South": {
+                "email": "lilian.greenwood.mp@parliament.uk",
+                "name": "Lilian Greenwood"
+            },
+            "Arundel and South Downs": {
+                "email": "andrew.griffith.mp@parliament.uk",
+                "name": "Andrew Griffith"
+            },
+            "Llanelli": {
+                "email": "nia.griffith.mp@parliament.uk",
+                "name": "Dame Nia Griffith"
+            },
+            "Bognor Regis and Littlehampton": {
+                "email": "alison.griffiths.mp@parliament.uk",
+                "name": "Alison Griffiths"
+            },
+            "Gorton and Denton": {
+                "email": "gwynnea@parliament.uk",
+                "name": "Andrew Gwynne"
+            },
+            "North West Leicestershire": {
+                "email": "amanda.hack.mp@parliament.uk",
+                "name": "Amanda Hack"
+            },
+            "Sheffield Heeley": {
+                "email": "louise.haigh.mp@parliament.uk",
+                "name": "Louise Haigh"
+            },
+            "Warrington South": {
+                "email": "sarah.hall.mp@parliament.uk",
+                "name": "Sarah Hall"
+            },
+            "Leeds North East": {
+                "email": "fabian.hamilton.mp@parliament.uk",
+                "name": "Fabian Hamilton"
+            },
+            "Birmingham Erdington": {
+                "email": "paulette.hamilton.mp@parliament.uk",
+                "name": "Paulette Hamilton"
+            },
+            "Belfast South and Mid Down": {
+                "email": "claire.hanna.mp@parliament.uk",
+                "name": "Claire Hanna"
+            },
+            "Esher and Walton": {
+                "email": "monica.harding.mp@parliament.uk",
+                "name": "Monica Harding"
+            },
+            "Kingston upon Hull West and Haltemprice": {
+                "email": "emma.hardy.mp@parliament.uk",
+                "name": "Emma Hardy"
+            },
+            "Neath and Swansea East": {
+                "email": "carolyn.harris.mp@parliament.uk",
+                "name": "Carolyn Harris"
+            },
+            "Castle Point": {
+                "email": "rebecca.harris.mp@parliament.uk",
+                "name": "Rebecca Harris"
+            },
+            "South Dorset": {
+                "email": "lloyd.hatton.mp@parliament.uk",
+                "name": "Lloyd Hatton"
+            },
+            "Dulwich and West Norwood": {
+                "email": "helen.hayes.mp@parliament.uk",
+                "name": "Helen Hayes"
+            },
+            "South Holland and The Deepings": {
+                "email": "hayesj@parliament.uk",
+                "name": "Sir John Hayes"
+            },
+            "Bournemouth East": {
+                "email": "tom.hayes.mp@parliament.uk",
+                "name": "Tom Hayes"
+            },
+            "Filton and Bradley Stoke": {
+                "email": "claire.hazelgrove.mp@parliament.uk",
+                "name": "Claire Hazelgrove"
+            },
+            "South Down": {
+                "email": "chris.hazzard.mp@parliament.uk",
+                "name": "Chris Hazzard"
+            },
+            "Rawmarsh and Conisbrough": {
+                "email": "john.healey.mp@parliament.uk",
+                "name": "John Healey"
+            },
+            "Preston": {
+                "email": "mark.hendrick.mp@parliament.uk",
+                "name": "Sir Mark Hendrick"
+            },
+            "South Cambridgeshire": {
+                "email": "pippa.heylings.mp@parliament.uk",
+                "name": "Pippa Heylings"
+            },
+            "Hackney South and Shoreditch": {
+                "email": "meghilliermp@parliament.uk",
+                "name": "Dame Meg Hillier"
+            },
+            "North East Hertfordshire": {
+                "email": "chris.hinchliff.mp@parliament.uk",
+                "name": "Chris Hinchliff"
+            },
+            "Pendle and Clitheroe": {
+                "email": "jonathan.hinder.mp@parliament.uk",
+                "name": "Jonathan Hinder"
+            },
+            "East Hampshire": {
+                "email": "damian.hinds.mp@parliament.uk",
+                "name": "Damian Hinds"
+            },
+            "North Dorset": {
+                "email": "simon.hoare.mp@parliament.uk",
+                "name": "Simon Hoare"
+            },
+            "Bath": {
+                "email": "wera.hobhouse.mp@parliament.uk",
+                "name": "Wera Hobhouse"
+            },
+            "Washington and Gateshead South": {
+                "email": "sharon.hodgson.mp@parliament.uk",
+                "name": "Mrs Sharon Hodgson"
+            },
+            "Basildon and Billericay": {
+                "email": "richard.holden.mp@parliament.uk",
+                "name": "Mr Richard Holden"
+            },
+            "Thirsk and Malton": {
+                "email": "kevin.hollinrake.mp@parliament.uk",
+                "name": "Kevin Hollinrake"
+            },
+            "Hamble Valley": {
+                "email": "paul.holmes.mp@parliament.uk",
+                "name": "Paul Holmes"
+            },
+            "Luton South and South Bedfordshire": {
+                "email": "rachel.hopkins.mp@parliament.uk",
+                "name": "Rachel Hopkins"
+            },
+            "Droitwich and Evesham": {
+                "email": "nigel.huddleston.mp@parliament.uk",
+                "name": "Nigel Huddleston"
+            },
+            "Epping Forest": {
+                "email": "neil.hudson.mp@parliament.uk",
+                "name": "Dr Neil Hudson"
+            },
+            "Bangor Aberconwy": {
+                "email": "claire.hughes.mp@parliament.uk",
+                "name": "Claire Hughes"
+            },
+            "Newry and Armagh": {
+                "email": "daire.hughes.mp@parliament.uk",
+                "name": "Dáire Hughes"
+            },
+            "Scarborough and Whitby": {
+                "email": "alison.hume.mp@parliament.uk",
+                "name": "Alison Hume"
+            },
+            "Godalming and Ash": {
+                "email": "huntj@parliament.uk",
+                "name": "Jeremy Hunt"
+            },
+            "Ealing Central and Acton": {
+                "email": "rupa.huq.mp@parliament.uk",
+                "name": "Dr Rupa Huq"
+            },
+            "Southport": {
+                "email": "patrick.hurley.mp@parliament.uk",
+                "name": "Patrick Hurley"
+            },
+            "Blackburn": {
+                "email": "adnan.hussain.mp@parliament.uk",
+                "name": "Mr Adnan Hussain"
+            },
+            "Bradford East": {
+                "email": "imran.hussain.mp@parliament.uk",
+                "name": "Imran Hussain"
+            },
+            "Stafford": {
+                "email": "leigh.ingham.mp@parliament.uk",
+                "name": "Leigh Ingham"
+            },
+            "Croydon East": {
+                "email": "natasha.irons.mp@parliament.uk",
+                "name": "Natasha Irons"
+            },
+            "Doncaster Central": {
+                "email": "sally.jameson.mp@parliament.uk",
+                "name": "Sally Jameson"
+            },
+            "Edinburgh West": {
+                "email": "christine.jardine.mp@parliament.uk",
+                "name": "Christine Jardine"
+            },
+            "Barnsley North": {
+                "email": "dan.jarvis.mp@parliament.uk",
+                "name": "Dan Jarvis"
+            },
+            "Eastleigh": {
+                "email": "liz.jarvis.mp@parliament.uk",
+                "name": "Liz Jarvis"
+            },
+            "Harwich and North Essex": {
+                "email": "bernard.jenkin.mp@parliament.uk",
+                "name": "Sir Bernard Jenkin"
+            },
+            "Newark": {
+                "email": "robert.jenrick.mp@parliament.uk",
+                "name": "Robert Jenrick"
+            },
+            "South West Norfolk": {
+                "email": "terry.jermy.mp@parliament.uk",
+                "name": "Terry Jermy"
+            },
+            "Newcastle-under-Lyme": {
+                "email": "adam.jogee.mp@parliament.uk",
+                "name": "Adam Jogee"
+            },
+            "Sleaford and North Hykeham": {
+                "email": "caroline.johnson.mp@parliament.uk",
+                "name": "Dr Caroline Johnson"
+            },
+            "Kingston upon Hull North and Cottingham": {
+                "email": "johnsond@parliament.uk",
+                "name": "Dame Diana Johnson"
+            },
+            "Liverpool Riverside": {
+                "email": "kim.johnson.mp@parliament.uk",
+                "name": "Kim Johnson"
+            },
+            "Wokingham": {
+                "email": "clive.jones.mp@parliament.uk",
+                "name": "Clive Jones"
+            },
+            "Bristol North West": {
+                "email": "darren.jones.mp@parliament.uk",
+                "name": "Darren Jones"
+            },
+            "Merthyr Tydfil and Aberdare": {
+                "email": "gerald.jones.mp@parliament.uk",
+                "name": "Gerald Jones"
+            },
+            "Kilmarnock and Loudoun": {
+                "email": "lillian.jones.mp@parliament.uk",
+                "name": "Lillian Jones"
+            },
+            "North East Derbyshire": {
+                "email": "louise.jones.mp@parliament.uk",
+                "name": "Louise Jones"
+            },
+            "Newport West and Islwyn": {
+                "email": "ruth.jones.mp@parliament.uk",
+                "name": "Ruth Jones"
+            },
+            "Croydon West": {
+                "email": "sarah.jones.mp@parliament.uk",
+                "name": "Sarah Jones"
+            },
+            "Spelthorne": {
+                "email": "lincoln.jopp.mp@parliament.uk",
+                "name": "Lincoln Jopp"
+            },
+            "Smethwick": {
+                "email": "gurinder.josan.mp@parliament.uk",
+                "name": "Gurinder Singh Josan"
+            },
+            "Ashford": {
+                "email": "sojan.joseph.mp@parliament.uk",
+                "name": "Sojan Joseph"
+            },
+            "Wolverhampton West": {
+                "email": "warinder.juss.mp@parliament.uk",
+                "name": "Warinder Juss"
+            },
+            "Stirling and Strathallan": {
+                "email": "chris.kane.mp@parliament.uk",
+                "name": "Chris Kane"
+            },
+            "Wythenshawe and Sale East": {
+                "email": "mike.kane.mp@parliament.uk",
+                "name": "Mike Kane"
+            },
+            "Southampton Test": {
+                "email": "satvir.kaur.mp@parliament.uk",
+                "name": "Satvir Kaur"
+            },
+            "Rutland and Stamford": {
+                "email": "alicia.kearns.mp@parliament.uk",
+                "name": "Alicia Kearns"
+            },
+            "Leicester West": {
+                "email": "liz.kendall.mp@parliament.uk",
+                "name": "Liz Kendall"
+            },
+            "Manchester Rusholme": {
+                "email": "afzal.khan.mp@parliament.uk",
+                "name": "Afzal Khan"
+            },
+            "Birmingham Perry Barr": {
+                "email": "ayoub.khan.mp@parliament.uk",
+                "name": "Ayoub Khan"
+            },
+            "Gillingham and Rainham": {
+                "email": "naushabah.khan.mp@parliament.uk",
+                "name": "Naushabah Khan"
+            },
+            "Aberafan Maesteg": {
+                "email": "stephen.kinnock.mp@parliament.uk",
+                "name": "Stephen Kinnock"
+            },
+            "Truro and Falmouth": {
+                "email": "jayne.kirkham.mp@parliament.uk",
+                "name": "Jayne Kirkham"
+            },
+            "Wellingborough and Rushden": {
+                "email": "gen.kitchen.mp@parliament.uk",
+                "name": "Gen Kitchen"
+            },
+            "Wimbledon": {
+                "email": "paul.kohler.mp@parliament.uk",
+                "name": "Mr Paul Kohler"
+            },
+            "Dudley": {
+                "email": "sonia.kumar.mp@parliament.uk",
+                "name": "Sonia Kumar"
+            },
+            "Stratford and Bow": {
+                "email": "uma.kumaran.mp@parliament.uk",
+                "name": "Uma Kumaran"
+            },
+            "Hove and Portslade": {
+                "email": "peter.kyle.mp@parliament.uk",
+                "name": "Peter Kyle"
+            },
+            "Aylesbury": {
+                "email": "laura.kyrkesmith.mp@parliament.uk",
+                "name": "Laura Kyrke-Smith"
+            },
+            "Ceredigion Preseli": {
+                "email": "ben.lake.mp@parliament.uk",
+                "name": "Ben Lake"
+            },
+            "Weald of Kent": {
+                "email": "katie.lam.mp@parliament.uk",
+                "name": "Katie Lam"
+            },
+            "Crawley": {
+                "email": "peter.lamb.mp@parliament.uk",
+                "name": "Peter Lamb"
+            },
+            "Tottenham": {
+                "email": "david.lammy.mp@parliament.uk",
+                "name": "Mr David Lammy"
+            },
+            "Berwickshire, Roxburgh and Selkirk": {
+                "email": "john.lamont.mp@parliament.uk",
+                "name": "John Lamont"
+            },
+            "Blyth and Ashington": {
+                "email": "ian.lavery.mp@parliament.uk",
+                "name": "Ian Lavery"
+            },
+            "Dundee Central": {
+                "email": "chris.law.mp@parliament.uk",
+                "name": "Chris Law"
+            },
+            "St Austell and Newquay": {
+                "email": "noah.law.mp@parliament.uk",
+                "name": "Noah Law"
+            },
+            "Spen Valley": {
+                "email": "kim.leadbeater.mp@parliament.uk",
+                "name": "Kim Leadbeater"
+            },
+            "Moray West, Nairn and Strathspey": {
+                "email": "graham.leadbitter.mp@parliament.uk",
+                "name": "Graham Leadbitter"
+            },
+            "Gainsborough": {
+                "email": "edward.leigh.mp@parliament.uk",
+                "name": "Sir Edward Leigh"
+            },
+            "Alloa and Grangemouth": {
+                "email": "brian.leishman.mp@parliament.uk",
+                "name": "Brian Leishman"
+            },
+            "South Shields": {
+                "email": "emma.lewell-buck.mp@parliament.uk",
+                "name": "Mrs Emma Lewell-Buck"
+            },
+            "Welwyn Hatfield": {
+                "email": "andrew.lewin.mp@parliament.uk",
+                "name": "Andrew Lewin"
+            },
+            "Norwich South": {
+                "email": "clive.lewis.mp@parliament.uk",
+                "name": "Clive Lewis"
+            },
+            "Wakefield and Rothwell": {
+                "email": "simon.lightwood.mp@parliament.uk",
+                "name": "Simon Lightwood"
+            },
+            "Upper Bann": {
+                "email": "carla.lockhart.mp@parliament.uk",
+                "name": "Carla Lockhart"
+            },
+            "Aberdeenshire North and Moray East": {
+                "email": "seamus.logan.mp@parliament.uk",
+                "name": "Seamus Logan"
+            },
+            "Salford": {
+                "email": "rebecca.longbailey.mp@parliament.uk",
+                "name": "Rebecca Long Bailey"
+            },
+            "Hornchurch and Upminster": {
+                "email": "julia.lopez.mp@parliament.uk",
+                "name": "Julia Lopez"
+            },
+            "Great Yarmouth": {
+                "email": "rupert.lowe.mp@parliament.uk",
+                "name": "Rupert Lowe"
+            },
+            "Whitehaven and Workington": {
+                "email": "josh.macalister.mp@parliament.uk",
+                "name": "Josh MacAlister"
+            },
+            "West Dunbartonshire": {
+                "email": "douglas.mcallister.mp@parliament.uk",
+                "name": "Douglas McAllister"
+            },
+            "Bristol East": {
+                "email": "kerry.mccarthy.mp@parliament.uk",
+                "name": "Kerry McCarthy"
+            },
+            "Lewes": {
+                "email": "james.maccleary.mp@parliament.uk",
+                "name": "James MacCleary"
+            },
+            "Inverclyde and Renfrewshire West": {
+                "email": "martin.mccluskey.mp@parliament.uk",
+                "name": "Martin McCluskey"
+            },
+            "Mitcham and Morden": {
+                "email": "mcdonaghs@parliament.uk",
+                "name": "Dame Siobhain McDonagh"
+            },
+            "Middlesbrough and Thornaby East": {
+                "email": "andy.mcdonald.2nd@parliament.uk",
+                "name": "Andy McDonald"
+            },
+            "Stockton North": {
+                "email": "chris.mcdonald.mp@parliament.uk",
+                "name": "Chris McDonald"
+            },
+            "Norwich North": {
+                "email": "alice.macdonald.mp@parliament.uk",
+                "name": "Alice Macdonald"
+            },
+            "Inverness, Skye and West Ross-shire": {
+                "email": "angus.macdonald.mp@parliament.uk",
+                "name": "Mr Angus MacDonald"
+            },
+            "Hayes and Harlington": {
+                "email": "mcdonnellj@parliament.uk",
+                "name": "John McDonnell"
+            },
+            "East Renfrewshire": {
+                "email": "blair.mcdougall.mp@parliament.uk",
+                "name": "Blair McDougall"
+            },
+            "Darlington": {
+                "email": "lola.mcevoy.mp@parliament.uk",
+                "name": "Lola McEvoy"
+            },
+            "Wolverhampton South East": {
+                "email": "mcfaddenp@parliament.uk",
+                "name": "Pat McFadden"
+            },
+            "Birkenhead": {
+                "email": "alison.mcgovern.mp@parliament.uk",
+                "name": "Alison McGovern"
+            },
+            "Gloucester": {
+                "email": "alex.mcintyre.mp@parliament.uk",
+                "name": "Alex McIntyre"
+            },
+            "Glasgow South": {
+                "email": "gordon.mckee.mp@parliament.uk",
+                "name": "Gordon McKee"
+            },
+            "Sittingbourne and Sheppey": {
+                "email": "kevin.mckenna.mp@parliament.uk",
+                "name": "Kevin McKenna"
+            },
+            "Newcastle upon Tyne North": {
+                "email": "catherine.mckinnell.mp@parliament.uk",
+                "name": "Catherine McKinnell"
+            },
+            "Oldham West, Chadderton and Royton": {
+                "email": "jim.mcmahon.mp@parliament.uk",
+                "name": "Jim McMahon"
+            },
+            "Cardiff North": {
+                "email": "anna.mcmorrin.mp@parliament.uk",
+                "name": "Anna McMorrin"
+            },
+            "South Basildon and East Thurrock": {
+                "email": "james.mcmurdock.mp@parliament.uk",
+                "name": "James McMurdock"
+            },
+            "Rossendale and Darwen": {
+                "email": "andy.macnae.mp@parliament.uk",
+                "name": "Andy MacNae"
+            },
+            "Coatbridge and Bellshill": {
+                "email": "frank.mcnally.mp@parliament.uk",
+                "name": "Frank McNally"
+            },
+            "Midlothian": {
+                "email": "kirsty.mcneill.mp@parliament.uk",
+                "name": "Kirsty McNeill"
+            },
+            "Tatton": {
+                "email": "esther.mcvey.mp@parliament.uk",
+                "name": "Esther McVey"
+            },
+            "Ellesmere Port and Bromborough": {
+                "email": "justin.madders.mp@parliament.uk",
+                "name": "Justin Madders"
+            },
+            "North Cornwall": {
+                "email": "ben.maguire.mp@parliament.uk",
+                "name": "Ben Maguire"
+            },
+            "Epsom and Ewell": {
+                "email": "helen.maguire.mp@parliament.uk",
+                "name": "Helen Maguire"
+            },
+            "Birmingham Ladywood": {
+                "email": "shabana.mahmood.mp@parliament.uk",
+                "name": "Shabana Mahmood"
+            },
+            "Havant": {
+                "email": "alan.mak.mp@parliament.uk",
+                "name": "Alan Mak"
+            },
+            "Feltham and Heston": {
+                "email": "seema.malhotra.mp@parliament.uk",
+                "name": "Seema Malhotra"
+            },
+            "Mid Ulster": {
+                "email": "cathal.mallaghan.mp@parliament.uk",
+                "name": "Mr Cathal Mallaghan"
+            },
+            "North West Hampshire": {
+                "email": "kit.malthouse.mp@parliament.uk",
+                "name": "Kit Malthouse"
+            },
+            "Portsmouth North": {
+                "email": "amanda.martin.mp@parliament.uk",
+                "name": "Amanda Martin"
+            },
+            "Tunbridge Wells": {
+                "email": "mike.martin.mp@parliament.uk",
+                "name": "Mike Martin"
+            },
+            "York Central": {
+                "email": "rachael.maskell.mp@parliament.uk",
+                "name": "Rachael Maskell"
+            },
+            "Belfast West": {
+                "email": "paul.maskey.mp@parliament.uk",
+                "name": "Paul Maskey"
+            },
+            "Selby": {
+                "email": "keir.mather.mp@parliament.uk",
+                "name": "Keir Mather"
+            },
+            "Melksham and Devizes": {
+                "email": "brian.mathew.mp@parliament.uk",
+                "name": "Brian Mathew"
+            },
+            "Dunstable and Leighton Buzzard": {
+                "email": "alex.mayer.mp@parliament.uk",
+                "name": "Alex Mayer"
+            },
+            "Broadland and Fakenham": {
+                "email": "jerome.mayhew.mp@parliament.uk",
+                "name": "Jerome Mayhew"
+            },
+            "Witney": {
+                "email": "charlie.maynard.mp@parliament.uk",
+                "name": "Charlie Maynard"
+            },
+            "Ynys Môn": {
+                "email": "llinos.medi.mp@parliament.uk",
+                "name": "Llinos Medi"
+            },
+            "Knowsley": {
+                "email": "anneliese.midgley.mp@parliament.uk",
+                "name": "Anneliese Midgley"
+            },
+            "Doncaster North": {
+                "email": "ed.miliband.mp@parliament.uk",
+                "name": "Ed Miliband"
+            },
+            "Bicester and Woodstock": {
+                "email": "calum.miller.mp@parliament.uk",
+                "name": "Calum Miller"
+            },
+            "Horsham": {
+                "email": "john.milne.mp@parliament.uk",
+                "name": "John Milne"
+            },
+            "Carlisle": {
+                "email": "julie.minns.mp@parliament.uk",
+                "name": "Ms Julie Minns"
+            },
+            "Stockport": {
+                "email": "navendu.mishra.mp@parliament.uk",
+                "name": "Navendu Mishra"
+            },
+            "Sutton Coldfield": {
+                "email": "andrew.mitchell.mp@parliament.uk",
+                "name": "Mr Andrew Mitchell"
+            },
+            "Sheffield Central": {
+                "email": "abtisam.mohamed.mp@parliament.uk",
+                "name": "Abtisam Mohamed"
+            },
+            "Dewsbury and Batley": {
+                "email": "iqbal.mohamed.mp@parliament.uk",
+                "name": "Iqbal Mohamed"
+            },
+            "South West Hertfordshire": {
+                "email": "gagan.mohindra.mp@parliament.uk",
+                "name": "Mr Gagan Mohindra"
+            },
+            "Camborne and Redruth": {
+                "email": "perran.moon.mp@parliament.uk",
+                "name": "Perran Moon"
+            },
+            "Keighley and Ilkley": {
+                "email": "robbie.moore.mp@parliament.uk",
+                "name": "Robbie Moore"
+            },
+            "Oxford West and Abingdon": {
+                "email": "layla.moran.mp@parliament.uk",
+                "name": "Layla Moran"
+            },
+            "Newport East": {
+                "email": "mordenj@parliament.uk",
+                "name": "Jessica Morden"
+            },
+            "West Dorset": {
+                "email": "edward.morello.mp@parliament.uk",
+                "name": "Edward Morello"
+            },
+            "North Shropshire": {
+                "email": "helen.morgan.mp@parliament.uk",
+                "name": "Helen Morgan"
+            },
+            "Portsmouth South": {
+                "email": "stephen.morgan.mp@parliament.uk",
+                "name": "Stephen Morgan"
+            },
+            "Easington": {
+                "email": "grahame.morris.mp@parliament.uk",
+                "name": "Grahame Morris"
+            },
+            "Hexham": {
+                "email": "joe.morris.mp@parliament.uk",
+                "name": "Joe Morris"
+            },
+            "Cheadle": {
+                "email": "tom.morrison.mp@parliament.uk",
+                "name": "Tom Morrison"
+            },
+            "Beaconsfield": {
+                "email": "joy.morrissey.mp@parliament.uk",
+                "name": "Joy Morrissey"
+            },
+            "Aldridge-Brownhills": {
+                "email": "wendy.morton.mp@parliament.uk",
+                "name": "Wendy Morton"
+            },
+            "Bexhill and Battle": {
+                "email": "kieran.mullan.mp@parliament.uk",
+                "name": "Dr Kieran Mullan"
+            },
+            "Dagenham and Rainham": {
+                "email": "margaret.mullane.mp@parliament.uk",
+                "name": "Margaret Mullane"
+            },
+            "Dumfriesshire, Clydesdale and Tweeddale": {
+                "email": "david.mundell.mp@parliament.uk",
+                "name": "David Mundell"
+            },
+            "Wells and Mendip Hills": {
+                "email": "tessa.munt.mp@parliament.uk",
+                "name": "Tessa Munt"
+            },
+            "Basingstoke": {
+                "email": "luke.murphy.mp@parliament.uk",
+                "name": "Luke Murphy"
+            },
+            "Edinburgh East and Musselburgh": {
+                "email": "chris.murray.mp@parliament.uk",
+                "name": "Chris Murray"
+            },
+            "Edinburgh South": {
+                "email": "ian.murray.mp@parliament.uk",
+                "name": "Ian Murray"
+            },
+            "Ealing North": {
+                "email": "james.murray.mp@parliament.uk",
+                "name": "James Murray"
+            },
+            "Cumbernauld and Kirkintilloch": {
+                "email": "katrina.murray.mp@parliament.uk",
+                "name": "Katrina Murray"
+            },
+            "Mid Dunbartonshire": {
+                "email": "susan.murray.mp@parliament.uk",
+                "name": "Susan Murray"
+            },
+            "South West Wiltshire": {
+                "email": "murrisona@parliament.uk",
+                "name": "Dr Andrew Murrison"
+            },
+            "Middlesbrough South and East Cleveland": {
+                "email": "luke.myer.mp@parliament.uk",
+                "name": "Luke Myer"
+            },
+            "Rushcliffe": {
+                "email": "james.naish.mp@parliament.uk",
+                "name": "James Naish"
+            },
+            "Crewe and Nantwich": {
+                "email": "connor.naismith.mp@parliament.uk",
+                "name": "Connor Naismith"
+            },
+            "Wigan": {
+                "email": "lisa.nandy.mp@parliament.uk",
+                "name": "Lisa Nandy"
+            },
+            "Vale of Glamorgan": {
+                "email": "kanishka.narayan.mp@parliament.uk",
+                "name": "Kanishka Narayan"
+            },
+            "Motherwell, Wishaw and Carluke": {
+                "email": "pamela.nash.mp@parliament.uk",
+                "name": "Pamela Nash"
+            },
+            "Cannock Chase": {
+                "email": "josh.newbury.mp@parliament.uk",
+                "name": "Josh Newbury"
+            },
+            "South Derbyshire": {
+                "email": "samantha.niblett.mp@parliament.uk",
+                "name": "Samantha Niblett"
+            },
+            "Warrington North": {
+                "email": "charlotte.nichols.mp@parliament.uk",
+                "name": "Charlotte Nichols"
+            },
+            "Romsey and Southampton North": {
+                "email": "caroline.nokes.mp@parliament.uk",
+                "name": "Caroline Nokes"
+            },
+            "Hereford and South Herefordshire": {
+                "email": "jesse.norman.mp@parliament.uk",
+                "name": "Jesse Norman"
+            },
+            "Nottingham North and Kimberley": {
+                "email": "alex.norris.mp@parliament.uk",
+                "name": "Alex Norris"
+            },
+            "North East Somerset and Hanham": {
+                "email": "dan.norris.mp@parliament.uk",
+                "name": "Dan Norris"
+            },
+            "Huntingdon": {
+                "email": "ben.obesejecty.mp@parliament.uk",
+                "name": "Ben Obese-Jecty"
+            },
+            "Harborough, Oadby and Wigston": {
+                "email": "neil.obrien.mp@parliament.uk",
+                "name": "Neil O'Brien"
+            },
+            "Argyll, Bute and South Lochaber": {
+                "email": "brendan.ohara.mp@parliament.uk",
+                "name": "Brendan O'Hara"
+            },
+            "Richmond Park": {
+                "email": "sarah.olney.mp@parliament.uk",
+                "name": "Sarah Olney"
+            },
+            "Great Grimsby and Cleethorpes": {
+                "email": "melanie.onn.mp@parliament.uk",
+                "name": "Melanie Onn"
+            },
+            "Newcastle upon Tyne Central and West": {
+                "email": "chi.onwurah.mp@parliament.uk",
+                "name": "Chi Onwurah"
+            },
+            "Stroud": {
+                "email": "simon.opher.mp@parliament.uk",
+                "name": "Dr Simon Opher"
+            },
+            "Edmonton and Winchmore Hill": {
+                "email": "kate.osamor.mp@parliament.uk",
+                "name": "Kate Osamor"
+            },
+            "Jarrow and Gateshead East": {
+                "email": "kate.osborne.mp@parliament.uk",
+                "name": "Kate Osborne"
+            },
+            "Chatham and Aylesford": {
+                "email": "tristan.osborne.mp@parliament.uk",
+                "name": "Tristan Osborne"
+            },
+            "Coventry North West": {
+                "email": "taiwo.owatemi.mp@parliament.uk",
+                "name": "Taiwo Owatemi"
+            },
+            "Luton North": {
+                "email": "sarah.owen.mp@parliament.uk",
+                "name": "Sarah Owen"
+            },
+            "Southampton Itchen": {
+                "email": "darren.paffey.mp@parliament.uk",
+                "name": "Darren Paffey"
+            },
+            "Peterborough": {
+                "email": "andrew.pakes.mp@parliament.uk",
+                "name": "Andrew Pakes"
+            },
+            "Witham": {
+                "email": "withammp@parliament.uk",
+                "name": "Priti Patel"
+            },
+            "Wirral West": {
+                "email": "matthew.patrick.mp@parliament.uk",
+                "name": "Matthew Patrick"
+            },
+            "Reigate": {
+                "email": "rebecca.paul.mp@parliament.uk",
+                "name": "Rebecca Paul"
+            },
+            "Gedling": {
+                "email": "michael.payne.mp@parliament.uk",
+                "name": "Michael Payne"
+            },
+            "Barnsley South": {
+                "email": "stephanie.peacock.mp@parliament.uk",
+                "name": "Stephanie Peacock"
+            },
+            "High Peak": {
+                "email": "jon.pearce.mp@parliament.uk",
+                "name": "Jon Pearce"
+            },
+            "Greenwich and Woolwich": {
+                "email": "matthew.pennycook.mp@parliament.uk",
+                "name": "Matthew Pennycook"
+            },
+            "Chesterfield": {
+                "email": "toby.perkins.mp@parliament.uk",
+                "name": "Mr Toby Perkins"
+            },
+            "Stratford-on-Avon": {
+                "email": "manuela.perteghella.mp@parliament.uk",
+                "name": "Manuela Perteghella"
+            },
+            "Birmingham Yardley": {
+                "email": "jess.phillips.mp@parliament.uk",
+                "name": "Jess Phillips"
+            },
+            "Houghton and Sunderland South": {
+                "email": "bridget.phillipson.mp@parliament.uk",
+                "name": "Bridget Phillipson"
+            },
+            "Croydon South": {
+                "email": "chris.philp.mp@parliament.uk",
+                "name": "Chris Philp"
+            },
+            "Surrey Heath": {
+                "email": "al.pinkerton.mp@parliament.uk",
+                "name": "Dr Al Pinkerton"
+            },
+            "Hendon": {
+                "email": "david.pintoduschinsky.mp@parliament.uk",
+                "name": "David Pinto-Duschinsky"
+            },
+            "Doncaster East and the Isle of Axholme": {
+                "email": "lee.pitcher.mp@parliament.uk",
+                "name": "Lee Pitcher"
+            },
+            "Leigh and Atherton": {
+                "email": "jo.platt.mp@parliament.uk",
+                "name": "Jo Platt"
+            },
+            "Plymouth Sutton and Devonport": {
+                "email": "luke.pollard.mp@parliament.uk",
+                "name": "Luke Pollard"
+            },
+            "Kensington and Bayswater": {
+                "email": "joe.powell.mp@parliament.uk",
+                "name": "Joe Powell"
+            },
+            "Manchester Central": {
+                "email": "contact@lucypowell.org.uk",
+                "name": "Lucy Powell"
+            },
+            "Livingston": {
+                "email": "gregor.poynton.mp@parliament.uk",
+                "name": "Gregor Poynton"
+            },
+            "Bury St Edmunds and Stowmarket": {
+                "email": "peter.prinsley.mp@parliament.uk",
+                "name": "Peter Prinsley"
+            },
+            "The Wrekin": {
+                "email": "mark.pritchard.mp@parliament.uk",
+                "name": "Mark Pritchard"
+            },
+            "Isle of Wight West": {
+                "email": "richard.quigley.mp@parliament.uk",
+                "name": "Mr Richard Quigley"
+            },
+            "Bolton South and Walkden": {
+                "email": "yasmin.qureshi.mp@parliament.uk",
+                "name": "Yasmin Qureshi"
+            },
+            "Exeter": {
+                "email": "steve.race.mp@parliament.uk",
+                "name": "Steve Race"
+            },
+            "Leicester East": {
+                "email": "shivani.raja.mp@parliament.uk",
+                "name": "Shivani Raja"
+            },
+            "Waveney Valley": {
+                "email": "adrian.ramsay.mp@parliament.uk",
+                "name": "Adrian Ramsay"
+            },
+            "Altrincham and Sale West": {
+                "email": "connor.rand.mp@parliament.uk",
+                "name": "Mr Connor Rand"
+            },
+            "Wrexham": {
+                "email": "andrew.ranger.mp@parliament.uk",
+                "name": "Andrew Ranger"
+            },
+            "Windsor": {
+                "email": "jack.rankin.mp@parliament.uk",
+                "name": "Jack Rankin"
+            },
+            "Ashton-under-Lyne": {
+                "email": "angela.rayner.mp@parliament.uk",
+                "name": "Angela Rayner"
+            },
+            "Northampton South": {
+                "email": "mike.reader.mp@parliament.uk",
+                "name": "Mike Reader"
+            },
+            "Exmouth and Exeter East": {
+                "email": "david.reed.mp@parliament.uk",
+                "name": "David Reed"
+            },
+            "Streatham and Croydon North": {
+                "email": "steve.reed.mp@parliament.uk",
+                "name": "Steve Reed"
+            },
+            "Lewisham West and East Dulwich": {
+                "email": "ellie.reeves.mp@parliament.uk",
+                "name": "Ellie Reeves"
+            },
+            "Leeds West and Pudsey": {
+                "email": "rachel.reeves.mp@parliament.uk",
+                "name": "Rachel Reeves"
+            },
+            "East Kilbride and Strathaven": {
+                "email": "joani.reid.mp@parliament.uk",
+                "name": "Joani Reid"
+            },
+            "Wycombe": {
+                "email": "emma.reynolds.mp@parliament.uk",
+                "name": "Emma Reynolds"
+            },
+            "Stalybridge and Hyde": {
+                "email": "jonathan.reynolds.mp@parliament.uk",
+                "name": "Jonathan Reynolds"
+            },
+            "Maidenhead": {
+                "email": "joshua.reynolds.mp@parliament.uk",
+                "name": "Mr Joshua Reynolds"
+            },
+            "Glasgow North": {
+                "email": "martin.rhodes.mp@parliament.uk",
+                "name": "Martin Rhodes"
+            },
+            "Clapham and Brixton Hill": {
+                "email": "bell.ribeiroaddy.mp@parliament.uk",
+                "name": "Bell Ribeiro-Addy"
+            },
+            "Rother Valley": {
+                "email": "jake.richards.mp@parliament.uk",
+                "name": "Jake Richards"
+            },
+            "Suffolk Coastal": {
+                "email": "jenny.riddellcarpenter.mp@parliament.uk",
+                "name": "Jenny Riddell-Carpenter"
+            },
+            "Northampton North": {
+                "email": "lucy.rigby.mp@parliament.uk",
+                "name": "Lucy Rigby"
+            },
+            "St Helens South and Whiston": {
+                "email": "marie.rimmer.mp@parliament.uk",
+                "name": "Ms Marie Rimmer"
+            },
+            "Lichfield": {
+                "email": "dave.robertson.mp@parliament.uk",
+                "name": "Dave Robertson"
+            },
+            "Isle of Wight East": {
+                "email": "joe.robertson.mp@parliament.uk",
+                "name": "Joe Robertson"
+            },
+            "Belfast East": {
+                "email": "gavin.robinson.mp@parliament.uk",
+                "name": "Gavin Robinson"
+            },
+            "Macclesfield": {
+                "email": "tim.roca.mp@parliament.uk",
+                "name": "Tim Roca"
+            },
+            "Reading Central": {
+                "email": "matt.rodda.mp@parliament.uk",
+                "name": "Matt Rodda"
+            },
+            "North Devon": {
+                "email": "ian.roome.mp@parliament.uk",
+                "name": "Ian Roome"
+            },
+            "Romford": {
+                "email": "andrew.rosindell.mp@parliament.uk",
+                "name": "Andrew Rosindell"
+            },
+            "Bishop Auckland": {
+                "email": "sam.rushworth.mp@parliament.uk",
+                "name": "Sam Rushworth"
+            },
+            "Congleton": {
+                "email": "sarah.russell.mp@parliament.uk",
+                "name": "Mrs Sarah Russell"
+            },
+            "East Worthing and Shoreham": {
+                "email": "tom.rutland.mp@parliament.uk",
+                "name": "Tom Rutland"
+            },
+            "Burnley": {
+                "email": "oliver.ryan.mp@parliament.uk",
+                "name": "Oliver Ryan"
+            },
+            "Frome and East Somerset": {
+                "email": "anna.sabine.mp@parliament.uk",
+                "name": "Anna Sabine"
+            },
+            "Finchley and Golders Green": {
+                "email": "sarah.sackman.mp@parliament.uk",
+                "name": "Sarah Sackman"
+            },
+            "Loughborough": {
+                "email": "jeevun.sandher.mp@parliament.uk",
+                "name": "Dr Jeevun Sandher"
+            },
+            "South Cotswolds": {
+                "email": "roz.savage.mp@parliament.uk",
+                "name": "Dr Roz Savage"
+            },
+            "Dwyfor Meirionnydd": {
+                "email": "liz.savilleroberts.mp@parliament.uk",
+                "name": "Liz Saville Roberts"
+            },
+            "Barrow and Furness": {
+                "email": "michelle.scrogham.mp@parliament.uk",
+                "name": "Michelle Scrogham"
+            },
+            "Leeds South West and Morley": {
+                "email": "mark.sewards.mp@parliament.uk",
+                "name": "Mark Sewards"
+            },
+            "Bradford West": {
+                "email": "naz.shah.mp@parliament.uk",
+                "name": "Naz Shah"
+            },
+            "Derby South": {
+                "email": "baggy.shanker.mp@parliament.uk",
+                "name": "Baggy Shanker"
+            },
+            "Rutherglen": {
+                "email": "michael.shanks.mp@parliament.uk",
+                "name": "Michael Shanks"
+            },
+            "Strangford": {
+                "email": "jim.shannon.mp@parliament.uk",
+                "name": "Jim Shannon"
+            },
+            "Solihull West and Shirley": {
+                "email": "neil.shastrihurst.mp@parliament.uk",
+                "name": "Dr Neil Shastri-Hurst"
+            },
+            "Wetherby and Easingwold": {
+                "email": "alec.shelbrooke.mp@parliament.uk",
+                "name": "Sir Alec Shelbrooke"
+            },
+            "Hampstead and Highgate": {
+                "email": "tulip.siddiq.mp@parliament.uk",
+                "name": "Tulip Siddiq"
+            },
+            "Ruislip, Northwood and Pinner": {
+                "email": "david.simmonds.mp@parliament.uk",
+                "name": "David Simmonds"
+            },
+            "Makerfield": {
+                "email": "josh.simons.mp@parliament.uk",
+                "name": "Josh Simons"
+            },
+            "Mid Dorset and North Poole": {
+                "email": "vikki.slade.mp@parliament.uk",
+                "name": "Vikki Slade"
+            },
+            "Hammersmith and Chiswick": {
+                "email": "slaughtera@parliament.uk",
+                "name": "Andy Slaughter"
+            },
+            "Rugby": {
+                "email": "john.slinger.mp@parliament.uk",
+                "name": "John Slinger"
+            },
+            "Hazel Grove": {
+                "email": "lisa.smart.mp@parliament.uk",
+                "name": "Lisa Smart"
+            },
+            "Lancaster and Wyre": {
+                "email": "cat.smith.mp@parliament.uk",
+                "name": "Cat Smith"
+            },
+            "North Northumberland": {
+                "email": "david.smith.mp@parliament.uk",
+                "name": "David Smith"
+            },
+            "Mid Buckinghamshire": {
+                "email": "greg.smith.mp@parliament.uk",
+                "name": "Greg Smith"
+            },
+            "Manchester Withington": {
+                "email": "jeff.smith.mp@parliament.uk",
+                "name": "Jeff Smith"
+            },
+            "Skipton and Ripon": {
+                "email": "julian.smith.mp@parliament.uk",
+                "name": "Sir Julian Smith"
+            },
+            "Blaenau Gwent and Rhymney": {
+                "email": "nick.smith.mp@parliament.uk",
+                "name": "Nick Smith"
+            },
+            "South West Devon": {
+                "email": "rebecca.smith.mp@parliament.uk",
+                "name": "Rebecca Smith"
+            },
+            "Hyndburn": {
+                "email": "sarah.smith.mp@parliament.uk",
+                "name": "Sarah Smith"
+            },
+            "Bristol South": {
+                "email": "karin.smyth.mp@parliament.uk",
+                "name": "Karin Smyth"
+            },
+            "Stoke-on-Trent Central": {
+                "email": "gareth.snell.mp@parliament.uk",
+                "name": "Gareth Snell"
+            },
+            "Fylde": {
+                "email": "andrew.snowden.mp@parliament.uk",
+                "name": "Mr Andrew Snowden"
+            },
+            "Leeds Central and Headingley": {
+                "email": "alex.sobel.mp@parliament.uk",
+                "name": "Alex Sobel"
+            },
+            "St Neots and Mid Cambridgeshire": {
+                "email": "ian.sollom.mp@parliament.uk",
+                "name": "Ian Sollom"
+            },
+            "Runnymede and Weybridge": {
+                "email": "ben.spencer.mp@parliament.uk",
+                "name": "Dr Ben Spencer"
+            },
+            "Central Suffolk and North Ipswich": {
+                "email": "patrick.spencer.mp@parliament.uk",
+                "name": "Patrick Spencer"
+            },
+            "Farnham and Bordon": {
+                "email": "greg.stafford.mp@parliament.uk",
+                "name": "Gregory Stafford"
+            },
+            "Falkirk": {
+                "email": "euan.stainbank.mp@parliament.uk",
+                "name": "Euan Stainbank"
+            },
+            "Holborn and St Pancras": {
+                "email": "keir.starmer.mp@parliament.uk",
+                "name": "Sir Keir Starmer"
+            },
+            "Mid Bedfordshire": {
+                "email": "blake.stephenson.mp@parliament.uk",
+                "name": "Blake Stephenson"
+            },
+            "Cardiff East": {
+                "email": "jo.stevens.mp@parliament.uk",
+                "name": "Jo Stevens"
+            },
+            "Airdrie and Shotts": {
+                "email": "kenneth.stevenson.mp@parliament.uk",
+                "name": "Kenneth Stevenson"
+            },
+            "Ayr, Carrick and Cumnock": {
+                "email": "elaine.stewart.mp@parliament.uk",
+                "name": "Elaine Stewart"
+            },
+            "Caithness, Sutherland and Easter Ross": {
+                "email": "jamie.stone.mp@parliament.uk",
+                "name": "Jamie Stone"
+            },
+            "Swindon North": {
+                "email": "will.stone.mp@parliament.uk",
+                "name": "Will Stone"
+            },
+            "Hitchin": {
+                "email": "alistair.strathern.mp@parliament.uk",
+                "name": "Alistair Strathern"
+            },
+            "Ilford North": {
+                "email": "wes.streeting.mp@parliament.uk",
+                "name": "Wes Streeting"
+            },
+            "Newton Aycliffe and Spennymoor": {
+                "email": "alan.strickland.mp@parliament.uk",
+                "name": "Alan Strickland"
+            },
+            "Central Devon": {
+                "email": "mel.stride.mp@parliament.uk",
+                "name": "Mel Stride"
+            },
+            "Blackley and Middleton South": {
+                "email": "graham.stringer.mp@parliament.uk",
+                "name": "Graham Stringer"
+            },
+            "Beverley and Holderness": {
+                "email": "grahamstuartmp@parliament.uk",
+                "name": "Graham Stuart"
+            },
+            "Bathgate and Linlithgow": {
+                "email": "kirsteen.sullivan.mp@parliament.uk",
+                "name": "Kirsteen Sullivan"
+            },
+            "Gravesham": {
+                "email": "lauren.sullivan.mp@parliament.uk",
+                "name": "Dr Lauren Sullivan"
+            },
+            "Coventry South": {
+                "email": "zarah.sultana.mp@parliament.uk",
+                "name": "Zarah Sultana"
+            },
+            "Richmond and Northallerton": {
+                "email": "rishi.sunak.mp@parliament.uk",
+                "name": "Rishi Sunak"
+            },
+            "Bracknell": {
+                "email": "peter.swallow.mp@parliament.uk",
+                "name": "Peter Swallow"
+            },
+            "South Antrim": {
+                "email": "robin.swann.mp@parliament.uk",
+                "name": "Robin Swann"
+            },
+            "New Forest West": {
+                "email": "swayned@parliament.uk",
+                "name": "Sir Desmond Swayne"
+            },
+            "Alyn and Deeside": {
+                "email": "tamim@parliament.uk",
+                "name": "Mark Tami"
+            },
+            "Dover and Deal": {
+                "email": "mike.tapp.mp@parliament.uk",
+                "name": "Mike Tapp"
+            },
+            "Paisley and Renfrewshire North": {
+                "email": "alison.taylor.mp@parliament.uk",
+                "name": "Alison Taylor"
+            },
+            "Hemel Hempstead": {
+                "email": "david.taylor.mp@parliament.uk",
+                "name": "David Taylor"
+            },
+            "Sutton and Cheam": {
+                "email": "luke.taylor.mp@parliament.uk",
+                "name": "Luke Taylor"
+            },
+            "North Warwickshire and Bedworth": {
+                "email": "rachel.taylor.mp@parliament.uk",
+                "name": "Rachel Taylor"
+            },
+            "Bromsgrove": {
+                "email": "bradley.thomas.mp@parliament.uk",
+                "name": "Bradley Thomas"
+            },
+            "Tewkesbury": {
+                "email": "cameron.thomas.mp@parliament.uk",
+                "name": "Cameron Thomas"
+            },
+            "Plymouth Moor View": {
+                "email": "fred.thomas.mp@parliament.uk",
+                "name": "Fred Thomas"
+            },
+            "Harrow West": {
+                "email": "gareth.thomas.mp@parliament.uk",
+                "name": "Gareth Thomas"
+            },
+            "Torfaen": {
+                "email": "nick.thomassymonds.mp@parliament.uk",
+                "name": "Nick Thomas-Symonds"
+            },
+            "Erewash": {
+                "email": "adam.thompson.mp@parliament.uk",
+                "name": "Adam Thompson"
+            },
+            "Islington South and Finsbury": {
+                "email": "thornberrye@parliament.uk",
+                "name": "Emily Thornberry"
+            },
+            "Boston and Skegness": {
+                "email": "richard.tice.mp@parliament.uk",
+                "name": "Richard Tice"
+            },
+            "Penistone and Stocksbridge": {
+                "email": "marie.tidball.mp@parliament.uk",
+                "name": "Dr Marie Tidball"
+            },
+            "East Ham": {
+                "email": "timmss@parliament.uk",
+                "name": "Sir Stephen Timms"
+            },
+            "West Suffolk": {
+                "email": "nick.timothy.mp@parliament.uk",
+                "name": "Nick Timothy"
+            },
+            "Bournemouth West": {
+                "email": "jessica.toale.mp@parliament.uk",
+                "name": "Jessica Toale"
+            },
+            "Chipping Barnet": {
+                "email": "dan.tomlinson.mp@parliament.uk",
+                "name": "Dan Tomlinson"
+            },
+            "Normanton and Hemsworth": {
+                "email": "trickettj@parliament.uk",
+                "name": "Jon Trickett"
+            },
+            "Sevenoaks": {
+                "email": "laura.trott.mp@parliament.uk",
+                "name": "Laura Trott"
+            },
+            "Mid and South Pembrokeshire": {
+                "email": "henry.tufnell.mp@parliament.uk",
+                "name": "Henry Tufnell"
+            },
+            "Tonbridge": {
+                "email": "tom.tugendhat.mp@parliament.uk",
+                "name": "Tom Tugendhat"
+            },
+            "Redcar": {
+                "email": "anna.turley.mp@parliament.uk",
+                "name": "Anna Turley"
+            },
+            "Watford": {
+                "email": "matt.turmaine.mp@parliament.uk",
+                "name": "Matt Turmaine"
+            },
+            "Kingston upon Hull East": {
+                "email": "karl.turner.mp@parliament.uk",
+                "name": "Karl Turner"
+            },
+            "Birmingham Northfield": {
+                "email": "laurence.turner.mp@parliament.uk",
+                "name": "Laurence Turner"
+            },
+            "Widnes and Halewood": {
+                "email": "derek.twigg.mp@parliament.uk",
+                "name": "Derek Twigg"
+            },
+            "Blaydon and Consett": {
+                "email": "liz.twist.mp@parliament.uk",
+                "name": "Liz Twist"
+            },
+            "Huddersfield": {
+                "email": "harpreet.uppal.mp@parliament.uk",
+                "name": "Harpreet Uppal"
+            },
+            "Henley and Thame": {
+                "email": "freddie.vanmierlo.mp@parliament.uk",
+                "name": "Freddie van Mierlo"
+            },
+            "Folkestone and Hythe": {
+                "email": "tony.vaughan.mp@parliament.uk",
+                "name": "Tony Vaughan"
+            },
+            "Walsall and Bloxwich": {
+                "email": "valerie.vaz.mp@parliament.uk",
+                "name": "Valerie Vaz"
+            },
+            "Brigg and Immingham": {
+                "email": "martin.vickers.mp@parliament.uk",
+                "name": "Martin Vickers"
+            },
+            "Stockton West": {
+                "email": "matt.vickers.mp@parliament.uk",
+                "name": "Matt Vickers"
+            },
+            "Harlow": {
+                "email": "chris.vince.mp@parliament.uk",
+                "name": "Chris Vince"
+            },
+            "South Devon": {
+                "email": "caroline.voaden.mp@parliament.uk",
+                "name": "Caroline Voaden"
+            },
+            "Bury South": {
+                "email": "christian.wakeford.mp@parliament.uk",
+                "name": "Christian Wakeford"
+            },
+            "Hamilton and Clyde Valley": {
+                "email": "imogen.walker.mp@parliament.uk",
+                "name": "Imogen Walker"
+            },
+            "Brighton Kemptown and Peacehaven": {
+                "email": "chris.ward.mp@parliament.uk",
+                "name": "Chris Ward"
+            },
+            "Cowdenbeath and Kirkcaldy": {
+                "email": "melanie.ward.mp@parliament.uk",
+                "name": "Melanie Ward"
+            },
+            "Rochdale": {
+                "email": "paul.waugh.mp@parliament.uk",
+                "name": "Paul Waugh"
+            },
+            "Blackpool South": {
+                "email": "chris.webb.mp@parliament.uk",
+                "name": "Chris Webb"
+            },
+            "Sherwood Forest": {
+                "email": "michelle.welsh.mp@parliament.uk",
+                "name": "Michelle Welsh"
+            },
+            "Hornsey and Friern Barnet": {
+                "email": "catherine.west.mp@parliament.uk",
+                "name": "Catherine West"
+            },
+            "Stretford and Urmston": {
+                "email": "andrew.western.mp@parliament.uk",
+                "name": "Andrew Western"
+            },
+            "Warwick and Leamington": {
+                "email": "matt.western.mp@parliament.uk",
+                "name": "Matt Western"
+            },
+            "Faversham and Mid Kent": {
+                "email": "helen.whately.mp@parliament.uk",
+                "name": "Helen Whately"
+            },
+            "Worsley and Eccles": {
+                "email": "michael.wheeler.mp@parliament.uk",
+                "name": "Michael Wheeler"
+            },
+            "Derbyshire Dales": {
+                "email": "john.whitby.mp@parliament.uk",
+                "name": "John Whitby"
+            },
+            "Bassetlaw": {
+                "email": "jo.white.mp@parliament.uk",
+                "name": "Jo White"
+            },
+            "Leeds North West": {
+                "email": "katie.white.mp@parliament.uk",
+                "name": "Katie White"
+            },
+            "Maldon": {
+                "email": "john.whittingdale.mp@parliament.uk",
+                "name": "Sir John Whittingdale"
+            },
+            "Nottingham East": {
+                "email": "nadia.whittome.mp@parliament.uk",
+                "name": "Nadia Whittome"
+            },
+            "North West Norfolk": {
+                "email": "james.wild.mp@parliament.uk",
+                "name": "James Wild"
+            },
+            "Cheltenham": {
+                "email": "max.wilkinson.mp@parliament.uk",
+                "name": "Max Wilkinson"
+            },
+            "Stoke-on-Trent North": {
+                "email": "david.williams.mp@parliament.uk",
+                "name": "David Williams"
+            },
+            "Stone, Great Wyrley and Penkridge": {
+                "email": "gavin.williamson.mp@parliament.uk",
+                "name": "Sir Gavin Williamson"
+            },
+            "Twickenham": {
+                "email": "munira.wilson.mp@parliament.uk",
+                "name": "Munira Wilson"
+            },
+            "East Antrim": {
+                "email": "barronj@parliament.uk",
+                "name": "Sammy Wilson"
+            },
+            "Perth and Kinross-shire": {
+                "email": "pete.wishart.mp@parliament.uk",
+                "name": "Pete Wishart"
+            },
+            "Montgomeryshire and Glyndŵr": {
+                "email": "steve.witherden.mp@parliament.uk",
+                "name": "Steve Witherden"
+            },
+            "Kingswinford and South Staffordshire": {
+                "email": "mike.wood.mp@parliament.uk",
+                "name": "Mike Wood"
+            },
+            "Banbury": {
+                "email": "sean.woodcock.mp@parliament.uk",
+                "name": "Sean Woodcock"
+            },
+            "Kenilworth and Southam": {
+                "email": "Jeremy.wright.mp@parliament.uk",
+                "name": "Sir Jeremy Wright"
+            },
+            "Kettering": {
+                "email": "rosie.wrighting.mp@parliament.uk",
+                "name": "Rosie Wrighting"
+            },
+            "Newton Abbot": {
+                "email": "martin.wrigley.mp@parliament.uk",
+                "name": "Martin Wrigley"
+            },
+            "Earley and Woodley": {
+                "email": "yuan.yang.mp@parliament.uk",
+                "name": "Yuan Yang"
+            },
+            "Bedford": {
+                "email": "mohammad.yasin.mp@parliament.uk",
+                "name": "Mohammad Yasin"
+            },
+            "Mansfield": {
+                "email": "steve.yemm.mp@parliament.uk",
+                "name": "Steve Yemm"
+            },
+            "Thornbury and Yate": {
+                "email": "claire.young.mp@parliament.uk",
+                "name": "Claire Young"
+            },
+            "Cambridge": {
+                "email": "daniel@danielzeichner.co.uk",
+                "name": "Daniel Zeichner"
+            }
+
+            // Add more constituencies here with corresponding name and email
+        };
+
+        // Function to update the email and name fields based on constituency selection
+        function updateFields() {
+            const constituencySelect = document.getElementById('constituency');
+            const selectedConstituency = constituencySelect.value;
+
+            // Fetch corresponding data based on the selected constituency name
+            const data = constituencyData[selectedConstituency] || { email: '', name: '' };
+
+            // Update the fields
+            document.getElementById('email').value = data.email;
+            document.getElementById('name').value = data.name;
+
+            // Update the body to include the person's name
+            const bodyField = document.getElementById('body');
+            bodyField.value = `Dear ${data.name || '[Name]'},\n\nI hope this message finds you well.\n\nI am writing to express my concerns about the leadership of Prime Minister Keir Starmer. During his time in office, I feel there have been several issues that have yet to be addressed effectively and have had a significant impact on the country.\n\nOne area of concern is the ongoing issue of child sexual exploitation, which has caused widespread harm. Despite investigations and numerous calls for action, there have been instances where progress on ensuring justice for victims has been slower than expected. It is vital that these issues are dealt with decisively and that those responsible are held accountable.\n\nAdditionally, I am worried about what appears to be a growing disparity in the approach to policing in different communities. Many people are feeling that the law is not always applied equally, which has contributed to a sense of frustration and mistrust toward law enforcement.\n\nI am also concerned about the increasing number of prosecutions related to social media posts. While it is important to maintain standards of conduct, it seems that the balance between protecting free speech and enforcing rules is becoming harder to achieve. The protection of fundamental freedoms, including the right to express opinions, must remain a priority.\n\nFurthermore, there is widespread sentiment among the public that the Prime Minister has failed to deliver on many of the promises he made during his election campaign. Many feel that these commitments have not been fulfilled, and trust in his leadership has been shaken as a result.\n\nGiven these issues, I respectfully ask you to consider supporting a vote of no confidence in Prime Minister Keir Starmer. I believe the UK needs leadership that ensures the safety, justice, and rights of its citizens are upheld.\n\nThank you for considering my concerns. I trust that you will continue to represent the views of your constituents and take the necessary steps to hold the government accountable.\n\nYours sincerely,`;
+        }
+
+        // Function to generate an email with the updated fields
+        function generateEmail() {
+            const email = document.getElementById('email').value;
+            const subject = encodeURIComponent(document.getElementById('subject').value);
+            const body = encodeURIComponent(document.getElementById('body').value);
+
+            if (!email) {
+                alert("Please select a constituency.");
+                return;
+            }
+
+            // Create the mailto link
+            const mailtoLink = `mailto:${email}?subject=${subject}&body=${body}`;
+            window.location.href = mailtoLink;
+        }
+    </script>
+</body>
+</html>
+
+    <!-- About Section -->
+    <div class="tab-content about">
+        <div class="donation-container">
+            <h1>About this Website</h1>
+            <p>
+                This website is designed to empower individuals by making it easy for them to express their views 
+                and concerns about the leadership of the Prime Minister. In doing so, it plays a vital role in supporting 
+                democracy by providing a straightforward platform for regular citizens to voice their dissatisfaction 
+                and hold their government accountable.
+            </p>
+            <p>
+                By facilitating direct communication between constituents and their elected representatives, the 
+                website ensures that every voice can be heard, regardless of political affiliation or background. It 
+                encourages active participation in the democratic process, allowing people to engage with their MPs 
+                and request meaningful action on issues that matter most to them.
+            </p>
+            <p>
+                In a time when political engagement can feel complex or inaccessible, this platform simplifies the 
+                process, ensuring that expressing one's opinion and participating in the democratic system is just a 
+                few clicks away. Whether you’re concerned about government policies or want to see a change in leadership, 
+                this website makes it easy to share your thoughts with those who have the power to make change.
+            </p>
+        </div>
+    </div>
+
+    <!-- Donations Section -->
+    <div class="tab-content donations">
+        <div class="donation-container">
+            <h1>Support Us with Your Donation</h1>
+            <p>Your donations help us continue our work. You can donate using PayPal or Bitcoin.</p>
+
+            <!-- PayPal Donation Button -->
+            <a href="https://www.paypal.com/donate/?hosted_button_id=XBTXQYH5QHWMQ" target="_blank" class="button">
+                Donate with PayPal
+            </a>
+
+            <div class="bitcoin-container">
+                <p>If you'd like to donate Bitcoin, send your donation to the address below:</p>
+                <p class="bitcoin-address">
+                    bc1qn32r704vdh905vytvs52gephxlns2qpwr3au9j
+                </p>
+                <p>Scan the QR code to send Bitcoin:</p>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?data=bitcoin%3Abc1qn32r704vdh905vytvs52gephxlns2qpwr3au9j&size=200x200" alt="Bitcoin QR Code" />
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to switch between tabs
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // Remove 'active' class from all tabs
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(button => button.classList.remove('active'));
+
+            // Show the selected tab and set the button as active
+            document.querySelector(`.${tabName}`).classList.add('active');
+            const activeButton = Array.from(tabButtons).find(button => button.textContent.toLowerCase() === tabName);
+            activeButton.classList.add('active');
+        }
+
+        // Function to generate an email with the updated fields
+        function generateEmail() {
+            const email = document.getElementById('email').value;
+            const subject = encodeURIComponent(document.getElementById('subject').value);
+            const body = encodeURIComponent(document.getElementById('body').value);
+
+            if (!email) {
+                alert("Please select a constituency.");
+                return;
+            }
+
+            // Create the mailto link
+            const mailtoLink = `mailto:${email}?subject=${subject}&body=${body}`;
+            window.location.href = mailtoLink;
+        }
+    </script>
+</body>
+</html>
