@@ -801,7 +801,7 @@
                     <!-- Add more constituencies here -->
                 </select>
 
-                <label for="name">Person's Name:</label>
+                <label for="name">MP's Name:</label>
                 <input type="text" id="name" readonly>
 
                 <label for="email">Email Address:</label>
@@ -3432,7 +3432,7 @@
             document.getElementById('email').value = data.email;
             document.getElementById('name').value = data.name;
 
-            // Update the body to include the person's name
+            // Update the body to include the MP's name
             const bodyField = document.getElementById('body');
             bodyField.value = `Dear ${data.name || '[Name]'},\n\nI hope this message finds you well.\n\nI am writing to express my concerns about the leadership of Prime Minister Keir Starmer. During his time in office, I feel there have been several issues that have yet to be addressed effectively and have had a significant impact on the country.\n\nOne area of concern is the ongoing issue of child sexual exploitation, which has caused widespread harm. Despite investigations and numerous calls for action, there have been instances where progress on ensuring justice for victims has been slower than expected. It is vital that these issues are dealt with decisively and that those responsible are held accountable.\n\nAdditionally, I am worried about what appears to be a growing disparity in the approach to policing in different communities. Many people are feeling that the law is not always applied equally, which has contributed to a sense of frustration and mistrust toward law enforcement.\n\nI am also concerned about the increasing number of prosecutions related to social media posts. While it is important to maintain standards of conduct, it seems that the balance between protecting free speech and enforcing rules is becoming harder to achieve. The protection of fundamental freedoms, including the right to express opinions, must remain a priority.\n\nFurthermore, there is widespread sentiment among the public that the Prime Minister has failed to deliver on many of the promises he made during his election campaign. Many feel that these commitments have not been fulfilled, and trust in his leadership has been shaken as a result.\n\nGiven these issues, I respectfully ask you to consider supporting a vote of no confidence in Prime Minister Keir Starmer. I believe the UK needs leadership that ensures the safety, justice, and rights of its citizens are upheld.\n\nThank you for considering my concerns. I trust that you will continue to represent the views of your constituents and take the necessary steps to hold the government accountable.\n\nYours sincerely,`;
         }
